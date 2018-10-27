@@ -1,0 +1,58 @@
+# /usr/bin/env sh
+
+rm -f ./console_n*
+rm -f ./n1_t0_d1_table.dt-out
+rm -f ./n2_t0_d1_table.dt-out			
+
+ruby ../gen_config.rb 4
+
+./controller nodes.txt config < public01.in
+
+#echo "Console N1: "
+#cat ./console_n1
+
+#echo "Console N4: "
+#cat ./console_n4
+
+#echo "Console N4: "
+#cat ./console_n4
+
+#echo "Console N4: "
+#cat ./console_n4
+
+
+#echo "Table N1: "
+#cat ./n1_t0_d1_table.dt
+
+
+#echo "Table N2: "
+#cat ./n2_t0_d1_table.dt
+
+touch ./n1_t0_d1_table.dt
+touch ./n2_t0_d1_table.dt				
+
+DIFF1=$(diff ./can_n1_t0_d1_table.out ./n1_t0_d1_table.dt)
+DIFF2=$(diff ./can_n2_t0_d1_table.out ./n2_t0_d1_table.dt)
+
+if [ "$DIFF1" != "" ]
+then
+    echo "Node 1 Routing table mismatch"
+    echo "$DIFF1"
+    exit 1
+else
+    echo "+Passed (1)"
+fi
+
+
+if [ "$DIFF2" != "" ]
+then
+    echo "Node 2 Routing table mismatch"
+    echo "$DIFF2"
+    exit 1
+else
+    echo "+Passed (2)"
+fi
+
+exit 0
+
+
