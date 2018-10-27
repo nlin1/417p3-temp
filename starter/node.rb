@@ -1,12 +1,40 @@
+require 'socket'
+require 'csv'
+
+$shutdown_flag = false
 $port = nil
 $hostname = nil
+$socketToNode = {} #Hashmap to index node by socket
+$nodeToSocket = {}
+$peers = {}
 
+#dst -> nexthop, dist
+routing_table = Hash.new
+
+class Peer
+	def initialize(ip, name, sock)
+		@buffer = ""
+		@ip = ip;
+		@hostname = name
+		@seq_num = 0
+		@sock = sock
+	end
+
+
+end
 
 
 # --------------------- Part 1 --------------------- # 
 
 def edgeb(cmd)
-	STDOUT.puts "EDGE: not implemented"
+	if(routing_table.has_key?(cmd[2]) && routing_table[cmd[2]][1] == 1)
+		return nil
+	else
+		routing_table[cmd[2]] = [cmd[2], 1]
+	end
+	sock = TCPSocket.new cmd[1], $nodes[cmd[2]]
+	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
+	sock.puts "EDGEB," + cmd[0] + "," + $hostname + "," + $port
 end
 
 def dumptable(cmd)
@@ -14,7 +42,9 @@ def dumptable(cmd)
 end
 
 def shutdown(cmd)
-	STDOUT.puts "SHUTDOWN: not implemented"
+	shutdown_flag = true
+	STDOUT.flush
+	STDERR.flush
 	exit(0)
 end
 
@@ -70,11 +100,11 @@ def main()
 		cmd = arr[0]
 		args = arr[1..-1]
 		case cmd
-		when "EDGEB"; edgeb(args)
+		when "EDGEB"; edgeb(args) #part 0
 		when "EDGED"; edged(args)
-		when "EDGEU”; edgeU(args)
-		when "DUMPTABLE"; dumptable(args)
-		when "SHUTDOWN"; shutdown(args)
+		when "EDGEU"; edgeU(args)
+		when "DUMPTABLE"; dumptable(args) #part 0
+		when "SHUTDOWN"; shutdown(args)	#part0
 		when "STATUS"; status()
 		when "SENDMSG"; sendmsg(args)
 		when "PING"; ping(args)
@@ -92,12 +122,34 @@ def setup(hostname, port, nodes, config)
 	$port = port
 
 	#set up ports, server, buffers
-	
-	$socketToNode = {} #Hashmap to index node by socket
-	
+
+	nodes.each_line do |line|
+		temp = line.split(',')
+		nodes[temp[0]] = temp[1]
+	end
+
+	node_listener(port)
 
 	main()
 
 end
+
+def node_listener(port)
+	server = TCPServer.open(port)
+	Thread.start() do |client|
+		while !shutdown_flag do
+			client = server.accept
+			line = client.gets
+			temp = line.split(',')
+			if temp[0] == "EDGEB"
+				t_sock = TCPSocket.new temp[1], temp[3]
+				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
+			end
+		end
+		client.close
+	end
+	server.close
+end
+
 
 setup(ARGV[0], ARGV[1], ARGV[2], ARGV[3])
