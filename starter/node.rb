@@ -9,7 +9,7 @@ $nodeToSocket = {}
 $peers = {}
 
 #dst -> nexthop, dist
-routing_table = Hash.new
+$routing_table = Hash.new
 
 class Peer
 	def initialize(ip, name, sock)
@@ -27,10 +27,10 @@ end
 # --------------------- Part 1 --------------------- #
 
 def edgeb(cmd)
-	if(routing_table.has_key?(cmd[2]) && routing_table[cmd[2]][1] == 1)
+	if($routing_table.has_key?(cmd[2]) && $routing_table[cmd[2]][1] == 1)
 		return nil
 	else
-		routing_table[cmd[2]] = [cmd[2], 1]
+		$routing_table[cmd[2]] = [cmd[2], 1]
 	end
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]]
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
@@ -48,7 +48,7 @@ def dumptable(cmd)
 		f = CSV.new(name)
 	end
 	begin # If there's an error opening the file, try again
-		routing_table.each { |k, v|
+		$routing_table.each { |k, v|
 			f << [hostname, k, v[0], v[1]]
 		}
 	rescue
@@ -164,7 +164,7 @@ def node_listener(port)
 			if temp[0] == "EDGEB"
 				t_sock = TCPSocket.new temp[1], temp[3]
 				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
-				routing_table[temp[1]] = [temp[1], 1]
+				$routing_table[temp[1]] = [temp[1], 1]
 			end
 		end
 		client.close
