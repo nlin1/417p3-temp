@@ -32,7 +32,7 @@ def edgeb(cmd)
 	else
 		routing_table[cmd[2]] = [cmd[2], 1]
 	end
-	sock = TCPSocket.new cmd[1], $nodes[cmd[2]]
+	sock = TCPSocket.new cmd[1], $node_map[cmd[2]]
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 	return 0
@@ -134,12 +134,13 @@ end
 def setup(hostname, port, nodes, config)
 	$hostname = hostname
 	$port = port
+	$node_map = {}
 
 	#set up ports, server, buffers
 
 	nodes.each_line do |line|
 		temp = line.split(',')
-		nodes[temp[0]] = temp[1]
+		node_map[temp[0]] = temp[1]
 	end
 
 	node_listener(port)
