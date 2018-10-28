@@ -24,7 +24,7 @@ class Peer
 end
 
 
-# --------------------- Part 1 --------------------- # 
+# --------------------- Part 1 --------------------- #
 
 def edgeb(cmd)
 	if(routing_table.has_key?(cmd[2]) && routing_table[cmd[2]][1] == 1)
@@ -38,19 +38,35 @@ def edgeb(cmd)
 end
 
 def dumptable(cmd)
-	STDOUT.puts "DUMPTABLE: not implemented"
+	f = nil
+	if File.exist? cmd then
+		f = CSV.open(cmd, "w")
+		f.truncate(0)
+	else
+		f = CSV.new(cmd)
+	end
+	begin # If there's an error opening the file, try again
+		routing_table.each { |k, v|
+			f << [hostname, k, v[0], v[1]]
+		}
+	rescue
+		dumptable(cmd)
+	end
 end
 
 def shutdown(cmd)
 	shutdown_flag = true
 	STDOUT.flush
 	STDERR.flush
+
+	# Shutdown the listener
+
 	exit(0)
 end
 
 
 
-# --------------------- Part 2 --------------------- # 
+# --------------------- Part 2 --------------------- #
 def edged(cmd)
 	STDOUT.puts "EDGED: not implemented"
 end
@@ -64,7 +80,7 @@ def status()
 end
 
 
-# --------------------- Part 3 --------------------- # 
+# --------------------- Part 3 --------------------- #
 def sendmsg(cmd)
 	STDOUT.puts "SENDMSG: not implemented"
 end
@@ -77,7 +93,7 @@ def traceroute(cmd)
 	STDOUT.puts "TRACEROUTE: not implemented"
 end
 
-# --------------------- Part 4 --------------------- # 
+# --------------------- Part 4 --------------------- #
 
 
 def ftp(cmd)
@@ -91,7 +107,7 @@ end
 
 
 
-# do main loop here.... 
+# do main loop here....
 def main()
 
 	while(line = STDIN.gets())
