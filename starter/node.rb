@@ -40,18 +40,19 @@ end
 
 def dumptable(cmd)
 	f = nil
-	if File.exist? cmd[0] then
-		f = CSV.open(cmd[0], "w")
+	name = cmd[0][2..-1]
+	if File.exist? name then
+		f = CSV.open(name, "w")
 		f.truncate(0)
 	else
-		f = CSV.new(cmd[0])
+		f = CSV.new(name)
 	end
 	begin # If there's an error opening the file, try again
 		routing_table.each { |k, v|
 			f << [hostname, k, v[0], v[1]]
 		}
 	rescue
-		dumptable(cmd[0])
+		dumptable(cmd)
 	end
 end
 
@@ -156,7 +157,7 @@ def node_listener(port)
 		while !shutdown_flag do
 			client = server.accept
 			line = client.gets
-			temp = line.split()
+			temp = line.split(',')
 			if temp[0] == "EDGEB"
 				t_sock = TCPSocket.new temp[1], temp[3]
 				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
