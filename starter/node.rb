@@ -155,7 +155,7 @@ def node_listener(port)
 		while !shutdown_flag do
 			client = server.accept
 			line = client.gets
-			temp = line.split(',')
+			temp = line.split()
 			if temp[0] == "EDGEB"
 				t_sock = TCPSocket.new temp[1], temp[3]
 				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
