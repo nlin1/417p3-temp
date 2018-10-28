@@ -58,10 +58,6 @@ def shutdown(cmd)
 	shutdown_flag = true
 	STDOUT.flush
 	STDERR.flush
-
-	# Shutdown the listener
-
-	exit(0)
 end
 
 
@@ -147,6 +143,8 @@ def setup(hostname, port, nodes, config)
 	node_listener(port)
 
 	main()
+
+	exit(0)
 
 end
 
