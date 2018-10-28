@@ -34,7 +34,7 @@ def edgeb(cmd)
 	end
 	sock = TCPSocket.new cmd[1], $nodes[cmd[2]]
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
-	sock.puts "EDGEB," + cmd[0] + "," + $hostname + "," + $port
+	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 end
 
 def dumptable(cmd)
