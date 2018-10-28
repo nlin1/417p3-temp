@@ -39,18 +39,18 @@ end
 
 def dumptable(cmd)
 	f = nil
-	if File.exist? cmd then
-		f = CSV.open(cmd, "w")
+	if File.exist? cmd[0] then
+		f = CSV.open(cmd[0], "w")
 		f.truncate(0)
 	else
-		f = CSV.new(cmd)
+		f = CSV.new(cmd[0])
 	end
 	begin # If there's an error opening the file, try again
 		routing_table.each { |k, v|
 			f << [hostname, k, v[0], v[1]]
 		}
 	rescue
-		dumptable(cmd)
+		dumptable(cmd[0])
 	end
 end
 
