@@ -138,8 +138,7 @@ def setup(hostname, port, nodes, config)
 
 	#set up ports, server, buffers
 
-
-	File.open(nodes, mode = "r") do |file| 
+	File.open(nodes, mode = "r") do |file|
 		file.each_line do |line|
 			temp = line.split(',')
 			$node_map[temp[0]] = temp[1]
