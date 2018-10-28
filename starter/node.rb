@@ -149,6 +149,7 @@ def setup(hostname, port, nodes, config)
 end
 
 def node_listener(port)
+	# TODO Switch threading structure so it doesn't make new one for each client
 	server = TCPServer.open(port)
 	Thread.start() do |client|
 		while !shutdown_flag do
