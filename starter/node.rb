@@ -42,7 +42,7 @@ end
 
 def dumptable(cmd)
 	f = nil
-	name = (cmd =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
+	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
 		f = CSV.open(name, "w")
 		f.truncate(0)
@@ -156,7 +156,6 @@ def setup(hostname, port, nodes, config)
 end
 
 def node_listener(port)
-	# TODO Switch threading structure so it doesn't make new one for each client
 	server = TCPServer.open(port)
 	puts "Server for " + $hostname.to_s + " opening on port " + port.to_s
 	t = Thread.new do |client|
@@ -165,7 +164,7 @@ def node_listener(port)
 			puts "" + $hostname.to_s + " in loop waiting for accept"
 			client = server.accept
 			line = client.gets
-			temp = line.split(',')
+			temp = line.split(" ")
 			if temp[0] == "EDGEB"
 				t_sock = TCPSocket.new temp[1], temp[3].to_i
 				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
