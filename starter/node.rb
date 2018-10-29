@@ -54,8 +54,8 @@ def dumptable(cmd)
 			f << [hostname, k, v[0], v[1]]
 		}
 		f.flush
-	rescue
-		puts "Can't open file"
+	rescue Exception => ex
+		puts "Can't open file, error of #{ex.class}"
 	end
 	f.close
 end
