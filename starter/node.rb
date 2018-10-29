@@ -50,7 +50,7 @@ def dumptable(cmd)
 	end
 	CSV.open(name) do |csv|
 		$routing_table.each { |k, v|
-			csv << [hostname, k, v[0], v[1]]
+			csv << [$hostname, k, v[0], v[1]]
 		}
 		csv.close
 	end
