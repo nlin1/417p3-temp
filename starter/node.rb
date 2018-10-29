@@ -44,18 +44,14 @@ def dumptable(cmd)
 	if File.exist? name then
 		File.open(name, "w") do |file|
 			file.truncate(0)
-			file.close
 		end
 	else
-		File.new(name, "w") do |file|
-			file.close
-		end
+		File.new(name, "w")
 	end
 	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
 			csv << [$hostname, k, v[0], v[1]]
 		}
-		csv.close
 	end
 end
 
