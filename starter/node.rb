@@ -162,7 +162,7 @@ def node_listener(port)
 			line = client.gets
 			temp = line.split(',')
 			if temp[0] == "EDGEB"
-				t_sock = TCPSocket.new temp[1], temp[3]
+				t_sock = TCPSocket.new temp[1], temp[3].to_i
 				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
 				$routing_table[temp[1]] = [temp[1], 1]
 			end
