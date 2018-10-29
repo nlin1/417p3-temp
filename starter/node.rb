@@ -35,6 +35,7 @@ def edgeb(cmd)
 	end
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
+	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 	return 0
 end
 
