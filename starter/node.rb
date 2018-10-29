@@ -157,11 +157,8 @@ end
 
 def node_listener(port)
 	server = TCPServer.open(port)
-	puts "Server for " + $hostname.to_s + " opening on port " + port.to_s
 	t = Thread.new do |client|
-		puts "thread created, shutdownflag = " + $shutdown_flag.to_s
 		while $shutdown_flag == false do
-			puts "" + $hostname.to_s + " in loop waiting for accept"
 			client = server.accept
 			line = client.gets
 			temp = line.split(" ")
