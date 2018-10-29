@@ -145,7 +145,7 @@ def setup(hostname, port, nodes, config)
 		end
 	end
 
-	node_listener(port)
+	node_listener(port.to_i)
 
 	main()
 
