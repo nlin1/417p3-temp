@@ -44,9 +44,12 @@ def dumptable(cmd)
 	if File.exist? name then
 		File.open(name, "w") do |file|
 			file.truncate(0)
+			file.close
 		end
 	else
-		File.new(name, "w")
+		File.new(name, "w") do |file|
+			file.close
+		end
 	end
 	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
@@ -57,7 +60,7 @@ def dumptable(cmd)
 end
 
 def shutdown(cmd)
-	shutdown_flag = true
+	$shutdown_flag = true
 	STDOUT.flush
 	STDERR.flush
 	exit(0)
