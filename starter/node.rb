@@ -31,7 +31,7 @@ def edgeb(cmd)
 	if($routing_table.has_key?(cmd[2]) && $routing_table[cmd[2]][1] == 1)
 		return nil
 	else
-		$routing_table[cmd[2]] = [cmd[2], 1]
+		$routing_table[cmd[1]] = [cmd[1], 1]
 	end
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
@@ -160,7 +160,7 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 		if temp[0] == "EDGEB"
-			puts "EDGEB Received"
+			#puts "EDGEB Received"
 			t_sock = TCPSocket.new temp[1], temp[3].to_i
 			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
 			$routing_table[temp[1]] = [temp[1], 1]
