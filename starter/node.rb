@@ -40,7 +40,7 @@ end
 
 def dumptable(cmd)
 	f = nil
-	name = (cmd =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
+	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
 		f = CSV.open(name, "w")
 		f.truncate(0)
