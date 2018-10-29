@@ -31,7 +31,7 @@ def edgeb(cmd)
 	if($routing_table.has_key?(cmd[2]) && $routing_table[cmd[2]][1] == 1)
 		return nil
 	else
-		$routing_table[cmd[1]] = [cmd[1], 1]
+		$routing_table[cmd[2]] = [cmd[1], 1]
 	end
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
@@ -47,7 +47,7 @@ def dumptable(cmd)
 	File.new(name, "w")
 	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
-			csv << [$hostname, k, v[0], v[1]]
+			csv << [$hostname, v[0], v[0], v[1]]
 		}
 	end
 end
