@@ -45,7 +45,7 @@ def dumptable(cmd)
 		f = CSV.open(name, "w")
 		f.truncate(0)
 	else
-		File.new(cmd[0], "w")
+		File.new(name, "w")
 		f = CSV.open(name, "w")
 	end
 	begin # If there's an error opening the file, try again
