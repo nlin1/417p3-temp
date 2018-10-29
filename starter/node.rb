@@ -41,6 +41,7 @@ end
 def dumptable(cmd)
 	f = nil
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
+	puts name
 	if File.exist? name then
 		f = CSV.open(name, "w")
 		f.truncate(0)
@@ -164,6 +165,7 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 		if temp[0] == "EDGEB"
+			puts "EDGEB Received"
 			t_sock = TCPSocket.new temp[1], temp[3].to_i
 			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
 			$routing_table[temp[1]] = [temp[1], 1]
