@@ -35,33 +35,28 @@ def edgeb(cmd)
 	end
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
+	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 	return 0
 end
 
 def dumptable(cmd)
-	f = nil
-	#name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
-	name = cmd[0]
+	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
-		f = CSV.open(name, "w")
-		f.truncate(0)
+		File.open(name, "w") do |file|
+			file.truncate(0)
+		end
 	else
-		File.new(cmd[0], "w")
-		f = CSV.open(name, "w")
+		File.new(name, "w")
 	end
-	begin # If there's an error opening the file, try again
+	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
-			f << [hostname, k, v[0], v[1]]
+			csv << [$hostname, k, v[0], v[1]]
 		}
-		f.flush
-	rescue
-		puts "Can't open file"
 	end
-	f.close
 end
 
 def shutdown(cmd)
-	shutdown_flag = true
+	$shutdown_flag = true
 	STDOUT.flush
 	STDERR.flush
 	exit(0)
@@ -165,9 +160,11 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 		if temp[0] == "EDGEB"
+			puts "EDGEB Received"
 			t_sock = TCPSocket.new temp[1], temp[3].to_i
 			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
 			$routing_table[temp[1]] = [temp[1], 1]
+			STDOUT.flush
 		end
 		client.close
 	end
