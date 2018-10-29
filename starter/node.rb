@@ -35,6 +35,7 @@ def edgeb(cmd)
 	end
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
+	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 	return 0
 end
 
@@ -42,21 +43,17 @@ def dumptable(cmd)
 	f = nil
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
-		f = CSV.open(name)
-		f.truncate(0)
+		g = File.open(name, "w")
+		g.truncate(0)
 	else
 		File.new(name, "w")
-		f = CSV.open(name)
 	end
-	begin # If there's an error opening the file, try again
+	CSV.open(name) do |csv|
 		$routing_table.each { |k, v|
-			f << [hostname, k, v[0], v[1]]
+			csv << [hostname, k, v[0], v[1]]
 		}
-		f.flush
-	rescue Exception => ex
-		puts "Can't open file, error of #{ex.class}"
+		csv.close
 	end
-	f.close
 end
 
 def shutdown(cmd)
@@ -168,6 +165,7 @@ def node_listener(port)
 			t_sock = TCPSocket.new temp[1], temp[3].to_i
 			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
 			$routing_table[temp[1]] = [temp[1], 1]
+			STDOUT.flush
 		end
 		client.close
 	end
