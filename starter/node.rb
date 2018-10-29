@@ -40,15 +40,15 @@ def edgeb(cmd)
 end
 
 def dumptable(cmd)
-	f = nil
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
-		g = File.open(name, "w")
-		g.truncate(0)
+		File.open(name, "w") do |file|
+			file.truncate(0)
+		end
 	else
 		File.new(name, "w")
 	end
-	CSV.open(name) do |csv|
+	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
 			csv << [$hostname, k, v[0], v[1]]
 		}
