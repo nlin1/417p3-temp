@@ -1,6 +1,5 @@
 require 'socket'
 require 'csv'
-require 'pry'
 
 
 $shutdown_flag = false
@@ -34,35 +33,38 @@ def edgeb(cmd)
 	else
 		$routing_table[cmd[2]] = [cmd[2], 1]
 	end
-	puts "Attempting to connect from " + $hostname.to_s + " to " + cmd[1].to_s + " on port " + $node_map[cmd[2]].to_s
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
-	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 	return 0
 end
 
 def dumptable(cmd)
 	f = nil
-	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
+	#name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
+	name = cmd[0]
 	if File.exist? name then
 		f = CSV.open(name, "w")
 		f.truncate(0)
 	else
-		f = CSV.new(name)
+		File.new(cmd[0], "w")
+		f = CSV.open(name, "w")
 	end
 	begin # If there's an error opening the file, try again
 		$routing_table.each { |k, v|
 			f << [hostname, k, v[0], v[1]]
 		}
+		f.flush
 	rescue
-		dumptable(cmd)
+		puts "Can't open file"
 	end
+	f.close
 end
 
 def shutdown(cmd)
 	shutdown_flag = true
 	STDOUT.flush
 	STDERR.flush
+	exit(0)
 end
 
 
@@ -148,28 +150,21 @@ def setup(hostname, port, nodes, config)
 		end
 	end
 
-	Thread.new {
+	t = Thread.new {
 		node_listener(port.to_i)
 	}
 
 	main()
 
-	exit(0)
-
 end
 
 def node_listener(port)
 	server = TCPServer.new port
-	puts "Server for " + $hostname.to_s + " opening on port " + port.to_s
-	puts "thread created, shutdownflag = " + $shutdown_flag.to_s
 	while $shutdown_flag == false do
-		puts "" + $hostname.to_s + " in lo0p waiting for accept"
 		client = server.accept
-		puts "" + $hostname.to_s + " accepted connection"
 		line = client.gets
 		temp = line.split(" ")
 		if temp[0] == "EDGEB"
-			puts "" + $hostname + " received EDGEB signal"
 			t_sock = TCPSocket.new temp[1], temp[3].to_i
 			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
 			$routing_table[temp[1]] = [temp[1], 1]
