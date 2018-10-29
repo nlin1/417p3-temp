@@ -1,5 +1,6 @@
 require 'socket'
 require 'csv'
+require 'pry'
 
 
 $shutdown_flag = false
@@ -147,7 +148,9 @@ def setup(hostname, port, nodes, config)
 		end
 	end
 
-	node_listener(port.to_i)
+	Thread.new {
+		node_listener(port.to_i)
+	}
 
 	main()
 
@@ -156,21 +159,23 @@ def setup(hostname, port, nodes, config)
 end
 
 def node_listener(port)
-	server = TCPServer.open(port)
-	t = Thread.new do |client|
-		while $shutdown_flag == false do
-			client = server.accept
-			line = client.gets
-			temp = line.split(" ")
-			if temp[0] == "EDGEB"
-				t_sock = TCPSocket.new temp[1], temp[3].to_i
-				$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
-				$routing_table[temp[1]] = [temp[1], 1]
-			end
+	server = TCPServer.new port
+	puts "Server for " + $hostname.to_s + " opening on port " + port.to_s
+	puts "thread created, shutdownflag = " + $shutdown_flag.to_s
+	while $shutdown_flag == false do
+		puts "" + $hostname.to_s + " in lo0p waiting for accept"
+		client = server.accept
+		puts "" + $hostname.to_s + " accepted connection"
+		line = client.gets
+		temp = line.split(" ")
+		if temp[0] == "EDGEB"
+			puts "" + $hostname + " received EDGEB signal"
+			t_sock = TCPSocket.new temp[1], temp[3].to_i
+			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
+			$routing_table[temp[1]] = [temp[1], 1]
 		end
 		client.close
 	end
-	t.join
 	server.close
 end
 
