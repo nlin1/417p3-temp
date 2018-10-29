@@ -47,7 +47,7 @@ def dumptable(cmd)
 		f.truncate(0)
 	else
 		File.new(cmd[0], "w")
-		f = CSV.new(name)
+		f = CSV.open(name, "w")
 	end
 	begin # If there's an error opening the file, try again
 		$routing_table.each { |k, v|
