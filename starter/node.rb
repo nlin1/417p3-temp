@@ -41,13 +41,12 @@ end
 def dumptable(cmd)
 	f = nil
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
-	puts name
 	if File.exist? name then
-		f = CSV.open(name, "w")
+		f = CSV.open(name)
 		f.truncate(0)
 	else
 		File.new(name, "w")
-		f = CSV.open(name, "w")
+		f = CSV.open(name)
 	end
 	begin # If there's an error opening the file, try again
 		$routing_table.each { |k, v|
