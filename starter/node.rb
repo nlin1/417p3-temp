@@ -42,21 +42,17 @@ def dumptable(cmd)
 	f = nil
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
-		f = CSV.open(name)
-		f.truncate(0)
+		g = File.open(name, "w")
+		g.truncate(0)
 	else
 		File.new(name, "w")
-		f = CSV.open(name)
 	end
-	begin # If there's an error opening the file, try again
+	CSV.open(name) do |csv|
 		$routing_table.each { |k, v|
-			f << [hostname, k, v[0], v[1]]
+			csv << [hostname, k, v[0], v[1]]
 		}
-		f.flush
-	rescue Exception => ex
-		puts "Can't open file, error of #{ex.class}"
+		csv.close
 	end
-	f.close
 end
 
 def shutdown(cmd)
