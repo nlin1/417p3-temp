@@ -71,7 +71,7 @@ def edged(cmd)
 end
 
 def edgeu(cmd)
-	if($routing_table.has_key(cmd[0]))
+	if($routing_table.has_key(cmd[0]) && (cmd[1] >= -2147483648 && cmd[1] <= 2147483647))
 		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
 	end
 	#$routing_table.each do |key, [val1, val2]|
