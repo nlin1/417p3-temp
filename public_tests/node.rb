@@ -90,7 +90,6 @@ def status()
 			print dst
 		end
 	end
-	print "\n"
 	STDOUT.flush
 
 end
