@@ -21,7 +21,9 @@ class Peer
 		@sock = sock
 	end
 
-
+	def close_sock()
+		sock.close
+	end
 end
 
 
@@ -42,15 +44,12 @@ end
 def dumptable(cmd)
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
-		File.open(name, "w") do |file|
-			file.truncate(0)
-		end
-	else
-		File.new(name, "w")
+		File.delete(name)
 	end
+	File.new(name, "w")
 	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
-			csv << [$hostname, k, v[0], v[1]]
+			csv << [$hostname, v[0], v[0], v[1]]
 		}
 	end
 end
@@ -66,15 +65,33 @@ end
 
 # --------------------- Part 2 --------------------- #
 def edged(cmd)
-	STDOUT.puts "EDGED: not implemented"
+	$routing_table.delete(cmd[0])
+	$peers[cmd[0]].close_sock
+	$peers.delete(cmd[0])
 end
 
 def edgeu(cmd)
-	STDOUT.puts "EDGEu: not implemented"
+	if($routing_table.has_key(cmd[0]))
+		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
+	end
+	#$routing_table.each do |key, [val1, val2]|
 end
 
 def status()
-	STDOUT.puts "STATUS: not implemented"
+	first = true
+	print "Name: " + $hostname + "\nPort: " + $port + "\nNeighbors: "
+	$routing_table.sort_by{|k,v| k}.each do |dst, nhop|
+		if dst == nhop[0] #checks if node is direct neighbor
+			if !first
+				print ","
+			else
+				first = false
+			end
+			print dst
+		end
+	end
+	STDOUT.flush
+
 end
 
 
@@ -160,12 +177,13 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 		if temp[0] == "EDGEB"
-			puts "EDGEB Received"
+			#puts "EDGEB Received"
 			t_sock = TCPSocket.new temp[1], temp[3].to_i
 			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
-			$routing_table[temp[1]] = [temp[1], 1]
+			$routing_table[temp[2]] = [temp[2], 1]
 			STDOUT.flush
 		end
+
 		client.close
 	end
 	server.close
