@@ -29,6 +29,15 @@ end
 
 # --------------------- Part 1 --------------------- #
 
+=begin
+ Format: EDGEB [SRCIP] [DSTIP] [DST]
+ Description: This method creates a symmetric edge between the node on which the com-
+mand is run, and the node specified by DST. By symmetric, we mean that the node specified
+by DST should have the reverse edge in its routing table. The cost of the edge should be
+initialized to 1. SRCIP and DSTIP are given to facilitate the initial connection between the
+nodes. This will enable your edges to be build without the need for address resolution (as is
+the case in NRL's CORE).
+=end
 def edgeb(cmd)
 	if($routing_table.has_key?(cmd[2]) && $routing_table[cmd[2]][1] == 1)
 		return nil
@@ -41,6 +50,14 @@ def edgeb(cmd)
 	return 0
 end
 
+=begin
+ Format: DUMPTABLE [FILENAME]
+ Description: When a node receives a DUMPTABLE command from the console, it should
+write its current view of the routing table as a CSV (with NO headers) to the file specified
+by FILENAME. The file should be created in the current working directory, and should be
+created if it does not already exist. If the file already exists, it should be overwritten. The
+file name will not include a leading \./"
+=end
 def dumptable(cmd)
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
 	if File.exist? name then
@@ -54,6 +71,12 @@ def dumptable(cmd)
 	end
 end
 
+=begin
+ Format: SHUTDOWN
+ Description: This should cleanly shutdown the node and 
+ush all pending write buffers (stdout, files, stderr). 
+The node should exit with status 0.
+=end
 def shutdown(cmd)
 	$shutdown_flag = true
 	STDOUT.flush
@@ -64,19 +87,36 @@ end
 
 
 # --------------------- Part 2 --------------------- #
+
+=begin
+ Format: EDGED [DST]
+ Description: This method destroys the edge from the source node to the dst node (i.e.
+removes all state information).
+=end
 def edged(cmd)
 	$routing_table.delete(cmd[0])
 	$peers[cmd[0]].close_sock
 	$peers.delete(cmd[0])
 end
 
+=begin
+ Format: EDGEU [DST] [COST]
+ Description: This method updates the cost of the link from the current node to the neighbor
+node specified by DST.
+=end
 def edgeu(cmd)
-	if($routing_table.has_key(cmd[0]))
+	if($routing_table.has_key(cmd[0]) && (cmd[1] >= -2147483648 && cmd[1] <= 2147483647))
 		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
 	end
-	#$routing_table.each do |key, [val1, val2]|
 end
 
+=begin
+ Format: STATUS
+ Description:The node should print out the following status information, formatted as follows:
+Name: <nodename>
+Port: <port the node is listening on>
+Neighbors: <lexicographically sorted list of neighbors, separated with commas and no spaces>
+=end
 def status()
 	first = true
 	print "Name: " + $hostname + "\nPort: " + $port + "\nNeighbors: "
@@ -92,19 +132,32 @@ def status()
 	end
 	print "\n"
 	STDOUT.flush
-
 end
 
 
 # --------------------- Part 3 --------------------- #
+
+=begin
+ Format: SENDMSG [DST] [MSG]
+ Description: This method will deliver the string MSG to the process running on DST.
+=end
 def sendmsg(cmd)
 	STDOUT.puts "SENDMSG: not implemented"
 end
 
+=begin
+ Format: PING [DST] [NUMPINGS] [DELAY]
+ Description: This method will send NUMPINGS ping messages to the DST. There should
+be a delay of DELAY seconds between pings.
+=end
 def ping(cmd)
 	STDOUT.puts "PING: not implemented"
 end
 
+=begin
+ Format: TRACEROUTE [DST]
+ Description: This method will perform traceroute from the SRC to the DST.
+=end
 def traceroute(cmd)
 	STDOUT.puts "TRACEROUTE: not implemented"
 end
