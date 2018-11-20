@@ -206,6 +206,7 @@ def setup(hostname, port, nodes, config)
 	$hostname = hostname
 	$port = port
 	$node_map = {}
+	$config_map = {}
 
 	#set up ports, server, buffers
 
@@ -216,12 +217,22 @@ def setup(hostname, port, nodes, config)
 		end
 	end
 
-	t = Thread.new {
+	File.open(config, mode = "r") do |file|
+		file.each_line do |line|
+			temp = line.split('=')
+			$config_map[temp[0]] = temp[1].to_i
+		end
+	end
+
+	t1 = Thread.new {
 		node_listener(port.to_i)
 	}
 
-	main()
+	t2 = Thread.new{
+		clock(config_map["updateInterval"])
+	}
 
+	main()
 end
 
 def node_listener(port)
@@ -243,5 +254,16 @@ def node_listener(port)
 	server.close
 end
 
+def clock(update_interval)
+	$sleep_interval =  update_interval / 2
+	$clock_semaphore = Mutex.new
+	$clock = Time.now
+	while(true)
+		sleep($sleep_interval)
+		$clock_semaphore.synchronize{
+			$clock = $clock + $sleep_interval
+		}
+	end
+end
 
 setup(ARGV[0], ARGV[1], ARGV[2], ARGV[3])
