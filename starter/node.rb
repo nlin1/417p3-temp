@@ -1,6 +1,7 @@
 require 'socket'
 require 'csv'
 
+Thread.abort_on_exception = true
 
 $shutdown_flag = false
 $port = nil
