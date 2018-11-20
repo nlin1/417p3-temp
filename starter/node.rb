@@ -9,6 +9,8 @@ $hostname = nil
 $socketToNode = {} #Hashmap to index node by socket
 $nodeToSocket = {}
 $peers = {}
+$task_queue = Queue.new
+queue_semaphore = Mutex.new
 
 #dst -> nexthop, dist
 $routing_table = Hash.new
@@ -242,13 +244,18 @@ def node_listener(port)
 		client = server.accept
 		line = client.gets
 		temp = line.split(" ")
-		if temp[0] == "EDGEB"
-			#puts "EDGEB Received"
-			t_sock = TCPSocket.new temp[1], temp[3].to_i
-			$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
-			$routing_table[temp[2]] = [temp[2], 1]
-			STDOUT.flush
-		end
+
+		queue_semaphore.synchronize{
+			$task_queue.push(temp)
+		}
+
+		# if temp[0] == "EDGEB"
+		# 	#puts "EDGEB Received"
+		# 	t_sock = TCPSocket.new temp[1], temp[3].to_i
+		# 	$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
+		# 	$routing_table[temp[2]] = [temp[2], 1]
+		# 	STDOUT.flush
+		# end
 
 		client.close
 	end
