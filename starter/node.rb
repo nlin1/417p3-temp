@@ -244,6 +244,7 @@ def node_listener(port)
 		client = server.accept
 		line = client.gets
 		temp = line.split(" ")
+		temp[0] = $commands[temp[0]]
 
 		queue_semaphore.synchronize{
 			$task_queue.push(temp)
