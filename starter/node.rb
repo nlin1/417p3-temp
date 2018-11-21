@@ -12,6 +12,20 @@ $peers = {}
 $task_queue = Queue.new
 queue_semaphore = Mutex.new
 
+$commands = {
+    "DUMPTABLE" => :dumptable,
+    "SHUTDOWN" => :shutdown,
+    "STATUS" => :status,
+    "EDGEB" => :edgeb,
+    "EDGEU" => :edgeu,
+    "EDGED" => :edged,
+    "SENDMSG" => :sendmsg,
+    "PING" => :ping,
+    "TRACEROUTE" => :traceroute,
+    "FTP" => :ftp,
+    "CIRCUIT" => :circuit
+}
+
 #dst -> nexthop, dist
 $routing_table = Hash.new
 
@@ -235,6 +249,10 @@ def setup(hostname, port, nodes, config)
 		clock(config_map["updateInterval"])
 	}
 
+    t3 = Thread.new {
+        task_thread()
+    }
+
 	main()
 end
 
@@ -272,6 +290,18 @@ def clock(update_interval)
 			$clock = $clock + $sleep_interval
 		}
 	end
+end
+
+def task_thread()
+    num_args = {
+
+    }
+    while (true)
+        if (!task_queue.empty?)
+            task = task_qeueu.pop
+
+        end
+    end
 end
 
 setup(ARGV[0], ARGV[1], ARGV[2], ARGV[3])
