@@ -31,6 +31,11 @@ $commands = {
 $routing_table = Hash.new
 
 class Peer
+
+	attr_accessor :hostname
+	attr_accessor :sock
+	attr_accessor :buffer
+
 	def initialize(ip, name, sock)
 		@buffer = ""
 		@ip = ip;
@@ -46,7 +51,15 @@ end
 
 
 def linkstate(cmd)
-    nil
+	packet[0] = $hostname
+	packet[1] = 20
+	i = 2
+   	$peers.each do |node, peer|
+   		packet[i] = [peer.hostname, routing_table[peer.hostname][1]]
+   	end
+   	$peers.each do |node, peer|
+   		peer.sock.puts(packet.inspect)
+   	end
 end
 
 
@@ -131,6 +144,8 @@ def edgeu(cmd)
 	if($routing_table.has_key(cmd[0]) && (cmd[1] >= -2147483648 && cmd[1] <= 2147483647))
 		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
 	end
+
+
 end
 
 =begin
@@ -333,6 +348,17 @@ def task_thread()
             if queue_flag
                 if task[0] == :status
                     status()
+                elsif task[0] == :edgeb
+                	#puts "EDGEB Received"
+					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
+					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
+					$routing_table[cmd[1]] = [cmd[1], 1]
+					STDOUT.flush
+				elsif task[0] == :linkstate
+					#STRUCTURE OF LINKSTATE PACKET
+					#SENDER NODE, AGE, [PEER1,COST1], [PEER2,COST2], etc.
+					
+					
                 else
                     send(task[0], cmd)
                 end
