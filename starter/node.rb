@@ -23,7 +23,8 @@ $commands = {
     "PING" => :ping,
     "TRACEROUTE" => :traceroute,
     "FTP" => :ftp,
-    "CIRCUIT" => :circuit
+    "CIRCUIT" => :circuit,
+    "LINKSTATE" => :linkstate
 }
 
 #dst -> nexthop, dist
@@ -41,6 +42,11 @@ class Peer
 	def close_sock()
 		sock.close
 	end
+end
+
+
+def linkstate(cmd)
+    nil
 end
 
 
