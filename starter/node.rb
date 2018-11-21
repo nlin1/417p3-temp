@@ -294,14 +294,18 @@ def clock(update_interval)
 end
 
 def task_thread()
-    num_args = {
-
-    }
     while (true)
-        if (!task_queue.empty?)
-            task = task_qeueu.pop
-
-        end
+        queue_semaphore.synchronize {
+            if (!task_queue.empty?)
+                task = task_queue.pop
+                cmd = task[1..-1]
+                if task[0] == :status
+                    status()
+                else
+                    send(task[0], cmd)
+                end
+            end
+        }
     end
 end
 
