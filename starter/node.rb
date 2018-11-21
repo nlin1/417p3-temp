@@ -295,8 +295,12 @@ end
 
 def task_thread()
     while (true)
+        # Synchronize the thread using mutex
         queue_semaphore.synchronize {
+            # If there are tasks to do, execute them
             if (!task_queue.empty?)
+                # Use ruby's function sending to execute
+                # the tasks that are enqueued
                 task = task_queue.pop
                 cmd = task[1..-1]
                 if task[0] == :status
