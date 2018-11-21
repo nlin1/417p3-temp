@@ -51,11 +51,14 @@ end
 
 
 def linkstate(cmd)
-	packet[0] = $hostname
-	packet[1] = 20
-	i = 2
+	packet[0] = "LINKSTATE"
+	packet[1] = $hostname
+	packet[2] = "20"
+	i = 3
    	$peers.each do |node, peer|
-   		packet[i] = [peer.hostname, routing_table[peer.hostname][1]]
+   		packet[i] = peer.hostname
+   		packet[i + 1] = routing_table[peer.hostname][1]
+   		i += 2
    	end
    	$peers.each do |node, peer|
    		peer.sock.puts(packet.inspect)
@@ -356,7 +359,7 @@ def task_thread()
 					STDOUT.flush
 				elsif task[0] == :linkstate
 					#STRUCTURE OF LINKSTATE PACKET
-					#SENDER NODE, AGE, [PEER1,COST1], [PEER2,COST2], etc.
+					#SENDER NODE, AGE, PEER1, COST1, PEER2, COST2, etc.
 					
 					
                 else
