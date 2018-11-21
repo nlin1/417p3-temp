@@ -315,6 +315,7 @@ def task_thread()
         }
         if time_flag
             # Do something for link state
+            task_clock = $clock
         else
             queue_flag = nil
             # Synchronize the thread using mutex
