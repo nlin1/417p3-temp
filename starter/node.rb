@@ -23,7 +23,8 @@ $commands = {
     "PING" => :ping,
     "TRACEROUTE" => :traceroute,
     "FTP" => :ftp,
-    "CIRCUIT" => :circuit
+    "CIRCUIT" => :circuit,
+    "LINKSTATE" => :linkstate
 }
 
 #dst -> nexthop, dist
@@ -41,6 +42,11 @@ class Peer
 	def close_sock()
 		sock.close
 	end
+end
+
+
+def linkstate(cmd)
+    nil
 end
 
 
@@ -294,13 +300,43 @@ def clock(update_interval)
 end
 
 def task_thread()
-    num_args = {
-
+    task_clock = nil
+    $clock_semaphore.synchronize {
+        task_clock = $clock
     }
     while (true)
-        if (!task_queue.empty?)
-            task = task_qeueu.pop
-
+        time_flag = nil
+        $clock_semaphore.synchronize {
+            if (($clock - task_clock) >= $config_map["updateInterval"])
+                time_flag = true
+            else
+                time_flag = false
+            end
+        }
+        if time_flag
+            # Do something for link state
+        else
+            queue_flag = nil
+            # Synchronize the thread using mutex
+            queue_semaphore.synchronize {
+                # If there are tasks to do, execute them
+                if (!task_queue.empty?)
+                    task = task_queue.pop
+                    cmd = task[1..-1]
+                    queue_flag = true
+                else
+                    queue_flag = false
+                end
+            }
+            # Use ruby's function sending to execute
+            # the tasks that are enqueued
+            if queue_flag
+                if task[0] == :status
+                    status()
+                else
+                    send(task[0], cmd)
+                end
+            end
         end
     end
 end
