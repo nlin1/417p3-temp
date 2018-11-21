@@ -44,9 +44,17 @@ class Peer
 	end
 end
 
-
+# Source, Sequence, Age, Send, Ack, Data
 def linkstate(cmd)
-    nil
+    source = cmd[0]
+    sequence = cmd[1]
+    age = cmd[2]
+    send = cmd[3]
+    ack = cmd[4]
+    data = cmd[5]
+    peers = $peers.keys
+    peers.delete(source)
+
 end
 
 
