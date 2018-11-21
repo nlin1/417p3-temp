@@ -10,7 +10,7 @@ $socketToNode = {} #Hashmap to index node by socket
 $nodeToSocket = {}
 $peers = {}
 $task_queue = Queue.new
-queue_semaphore = Mutex.new
+$queue_semaphore = Mutex.new
 
 $commands = {
     "DUMPTABLE" => :dumptable,
