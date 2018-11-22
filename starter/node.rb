@@ -6,11 +6,11 @@ Thread.abort_on_exception = true
 $shutdown_flag = false
 $port = nil
 $hostname = nil
-$socketToNode = {} #Hashmap to index node by socket
-$nodeToSocket = {}
 $peers = {}
+$LStable = Hash.new
 $task_queue = Queue.new
-queue_semaphore = Mutex.new
+$queue_semaphore = Mutex.new
+$current_linkstate = 0
 
 $commands = {
     "DUMPTABLE" => :dumptable,
@@ -49,20 +49,39 @@ class Peer
 	end
 end
 
+#STRUCTURE OF LINKSTATE PACKET
+#LINKSTATE, LSnum, SENDER NODE, AGE, PEER1, COST1, PEER2, COST2, etc.
+def linkstate(msg)
+	temp = []
+	if msg == nil
+		$current_linkstate += 1
+		packet = "LINKSTATE " + $current_linkstate + " " + $hostname + " 20 " 
+		# packet[0] = "LINKSTATE"
+		# packet[1] = $current_linkstate
+		# packet[2] = $hostname
+		# packet[3] = "20"
+	   	$peers.each do |node, peer|
+	   		packet += peer.hostname + " " + $routing_table[peer.hostname][1] + " "
+	   	end
+	else
+		packet = msg
+		temp = msg.split(' ')
+		if !$LStable.has_key[temp[1]]
+			$LStable[temp[1]] = Hash.new
+		end
 
-def linkstate(cmd)
-	packet[0] = "LINKSTATE"
-	packet[1] = $hostname
-	packet[2] = "20"
-	i = 3
+		if $LStable[temp[1]].has_key?(temp[2]) #if we have the packet already
+			return;
+		else	#otherwise keep packet
+			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and 
+		end
+	end
    	$peers.each do |node, peer|
-   		packet[i] = peer.hostname
-   		packet[i + 1] = routing_table[peer.hostname][1]
-   		i += 2
+   		if(msg != nil && temp[2] != peer.hostname) #send to peers besides sender
+   			peer.sock.puts(packet)
+   		end
    	end
-   	$peers.each do |node, peer|
-   		peer.sock.puts(packet.inspect)
-   	end
+   	$current_linkstate += 1
 end
 
 
@@ -286,11 +305,16 @@ def node_listener(port)
 		client = server.accept
 		line = client.gets
 		temp = line.split(" ")
+
+		if temp[0] = "LINKSTATE"
+			linkstate(line)
+
 		temp[0] = $commands[temp[0]]
 
-		queue_semaphore.synchronize{
+		$queue_semaphore.synchronize{
 			$task_queue.push(temp)
 		}
+
 
 		# if temp[0] == "EDGEB"
 		# 	#puts "EDGEB Received"
@@ -336,7 +360,7 @@ def task_thread()
         else
             queue_flag = nil
             # Synchronize the thread using mutex
-            queue_semaphore.synchronize {
+            $queue_semaphore.synchronize {
                 # If there are tasks to do, execute them
                 if (!task_queue.empty?)
                     task = task_queue.pop
@@ -351,16 +375,15 @@ def task_thread()
             if queue_flag
                 if task[0] == :status
                     status()
+
                 elsif task[0] == :edgeb
                 	#puts "EDGEB Received"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
 					$routing_table[cmd[1]] = [cmd[1], 1]
 					STDOUT.flush
+
 				elsif task[0] == :linkstate
-					#STRUCTURE OF LINKSTATE PACKET
-					#SENDER NODE, AGE, PEER1, COST1, PEER2, COST2, etc.
-					
 					
                 else
                     send(task[0], cmd)
