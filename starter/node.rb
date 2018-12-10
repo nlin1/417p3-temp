@@ -1,6 +1,5 @@
 require 'socket'
 require 'csv'
-require 'set'
 require 'thread'
 
 Thread.abort_on_exception = true
@@ -10,7 +9,7 @@ $port = nil
 $hostname = nil
 $peers = {}
 $LStable = Hash.new
-$task_queue = Queue.new
+$task_queue = Array.new
 $queue_semaphore = Mutex.new
 $current_linkstate = 0
 
@@ -57,7 +56,7 @@ def linkstate(msg)
 	temp = []
 	if msg == nil
 		$current_linkstate += 1
-		packet = "LINKSTATE " + $current_linkstate + " " + $hostname + " 20 "
+		packet = "LINKSTATE " + $current_linkstate + " " + $hostname + " 20 " 
 		# packet[0] = "LINKSTATE"
 		# packet[1] = $current_linkstate
 		# packet[2] = $hostname
@@ -75,7 +74,7 @@ def linkstate(msg)
 		if $LStable[temp[1]].has_key?(temp[2]) #if we have the packet already
 			return;
 		else	#otherwise keep packet
-			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
+			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and 
 		end
 	end
    	$peers.each do |node, peer|
@@ -83,76 +82,9 @@ def linkstate(msg)
    			peer.sock.puts(packet)
    		end
    	end
-   	$current_linkstate += 1
+   	$current_linkstate = temp[1]
 end
 
-def dijkstra(table)
-  localhost = Peer.new("127.0.0.1", @hostname, nil)
-  dist = Hash.new
-  visited = Set.new
-  nextNode = Queue.new
-  dist[localhost] = 0
-  parent = Hash.new
-  $routing_table.each do |dest, val|
-    dist[dest] = -1
-  end
-  while !nextNode.empty?
-    nextHop = minDist(dist, nextNode)
-    if visited.contains? nextHop
-      next
-    else
-      visited.add(nextHop)
-      nextHopName = nextHop.hostname
-      neighborsList = table[nextHopName]
-      neighbors = Hash.new
-      for i in (0...neighborsList.length).step(2)
-        neighbors[neighborsList[i]] = neighborsList[i + 1]
-      end
-      neighbors.each do |n|
-        name = getNodeFromName(n)
-        nextNode.add(name)
-        distuTov = neighbors[n]
-        if dist[name] > dist[nextHop] + distuTov || dist[name] == -1
-          dist[name] = dist[nextHop] + distuTov
-          parent[name] = nextHop
-        end
-      end
-    end
-  end
-  $routing_table.each do |key, value|
-    $routing_table[key] = [dist[key], getNextHop(parent, key)]
-  end
-end
-
-def getNextHop(parent, node)
-  if parent[parent[node]] == -1
-    return node
-  end
-  getNextHop(parent, parent[node])
-end
-
-def getNodeFromName(hostname)
-  res = nil
-  $routing_table.each do |key, _|
-    if key.hostname == hostname
-      res = key
-      break
-    end
-  end
-  return res
-end
-
-def minDist(distTable, queue)
-  min = nil
-  val = nil
-  queue.each do |item|
-    if val == nil || distTable[item] < val
-      val = distTable[item]
-      min = item
-    end
-  end
-  return min
-end
 
 # --------------------- Part 1 --------------------- #
 
@@ -201,8 +133,8 @@ end
 
 =begin
  Format: SHUTDOWN
- Description: This should cleanly shutdown the node and
-ush all pending write buffers (stdout, files, stderr).
+ Description: This should cleanly shutdown the node and 
+ush all pending write buffers (stdout, files, stderr). 
 The node should exit with status 0.
 =end
 def shutdown(cmd)
@@ -374,9 +306,12 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 
-		if temp[0] = "LINKSTATE"
+		puts "" + $hostname + " recieved packet: " + line
+
+		if temp[0] == "LINKSTATE"
 			linkstate(line)
 		end
+		puts temp[0] + " " + $commands[temp[0]].to_s
 
 		temp[0] = $commands[temp[0]]
 
@@ -408,6 +343,7 @@ def clock(update_interval)
 			$clock = $clock + $sleep_interval
 		}
 		#puts "clock incremented to " + $clock.to_s
+		#puts "queue: " + ($task_queue.first == nil ? "nil" : $task_queue.first.to_s)
 
 	end
 end
@@ -415,35 +351,31 @@ end
 def task_thread()
 	puts "task thread started"
     task_clock = nil
+    task = []
+    cmd = []
     $clock_semaphore.synchronize {
         task_clock = $clock
     }
-    runls = false
     while (true)
         time_flag = nil
         $clock_semaphore.synchronize {
-            if (($clock - task_clock) >= $config_map["updateInterval"] * 2)
+            if (($clock - task_clock) >= $config_map["updateInterval"]*2)
                 time_flag = true
+                task_clock = $clock
             else
                 time_flag = false
             end
         }
         if time_flag
             # Do something for link state
-            task_clock = $clock
-            if runls
-              linkstate(nil)
-            else
-              dijkstra($LStable)
-            end
-            runls = !runls
         else
             queue_flag = nil
             # Synchronize the thread using mutex
             $queue_semaphore.synchronize {
                 # If there are tasks to do, execute them
-                if (!$task_queue.empty?)
-                    task = $task_queue.pop
+                if ($task_queue.first != nil)
+                	puts "found item in task queue"
+                    task = $task_queue.shift
                     cmd = task[1..-1]
                     queue_flag = true
                 else
@@ -465,10 +397,13 @@ def task_thread()
 					STDOUT.flush
 
 				elsif task[0] == :linkstate
-
+					
                 else
                     send(task[0], cmd)
                 end
+
+                task.clear
+                cmd.clear
             end
         end
     end
