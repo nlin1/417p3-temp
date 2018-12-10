@@ -9,7 +9,7 @@ $port = nil
 $hostname = nil
 $peers = {}
 $LStable = Hash.new
-$task_queue = Queue.new
+$task_queue = Array.new
 $queue_semaphore = Mutex.new
 $current_linkstate = 0
 
@@ -82,7 +82,7 @@ def linkstate(msg)
    			peer.sock.puts(packet)
    		end
    	end
-   	$current_linkstate += 1
+   	$current_linkstate = temp[1]
 end
 
 
@@ -306,9 +306,12 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 
-		if temp[0] = "LINKSTATE"
+		puts "" + $hostname + " recieved packet: " + line
+
+		if temp[0] == "LINKSTATE"
 			linkstate(line)
 		end
+		puts temp[0] + " " + $commands[temp[0]].to_s
 
 		temp[0] = $commands[temp[0]]
 
@@ -340,6 +343,7 @@ def clock(update_interval)
 			$clock = $clock + $sleep_interval
 		}
 		#puts "clock incremented to " + $clock.to_s
+		#puts "queue: " + ($task_queue.first == nil ? "nil" : $task_queue.first.to_s)
 
 	end
 end
@@ -347,14 +351,17 @@ end
 def task_thread()
 	puts "task thread started"
     task_clock = nil
+    task = []
+    cmd = []
     $clock_semaphore.synchronize {
         task_clock = $clock
     }
     while (true)
         time_flag = nil
         $clock_semaphore.synchronize {
-            if (($clock - task_clock) >= $config_map["updateInterval"])
+            if (($clock - task_clock) >= $config_map["updateInterval"]*2)
                 time_flag = true
+                task_clock = $clock
             else
                 time_flag = false
             end
@@ -366,8 +373,9 @@ def task_thread()
             # Synchronize the thread using mutex
             $queue_semaphore.synchronize {
                 # If there are tasks to do, execute them
-                if (!$task_queue.empty?)
-                    task = $task_queue.pop
+                if ($task_queue.first != nil)
+                	puts "found item in task queue"
+                    task = $task_queue.shift
                     cmd = task[1..-1]
                     queue_flag = true
                 else
@@ -393,6 +401,9 @@ def task_thread()
                 else
                     send(task[0], cmd)
                 end
+
+                task.clear
+                cmd.clear
             end
         end
     end
