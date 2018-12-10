@@ -415,10 +415,11 @@ def task_thread()
     $clock_semaphore.synchronize {
         task_clock = $clock
     }
+    runls = false
     while (true)
         time_flag = nil
         $clock_semaphore.synchronize {
-            if (($clock - task_clock) >= $config_map["updateInterval"])
+            if (($clock - task_clock) >= $config_map["updateInterval"] * 2)
                 time_flag = true
             else
                 time_flag = false
@@ -427,6 +428,12 @@ def task_thread()
         if time_flag
             # Do something for link state
             task_clock = $clock
+            if runls
+              linkstate(nil)
+            else
+              dijkstra($LStable)
+            end
+            runls = !runls
         else
             queue_flag = nil
             # Synchronize the thread using mutex
