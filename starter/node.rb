@@ -1,5 +1,6 @@
 require 'socket'
 require 'csv'
+require 'thread'
 
 Thread.abort_on_exception = true
 
@@ -66,7 +67,7 @@ def linkstate(msg)
 	else
 		packet = msg
 		temp = msg.split(' ')
-		if !$LStable.has_key[temp[1]]
+		if !$LStable.has_key?(temp[1])
 			$LStable[temp[1]] = Hash.new
 		end
 
@@ -97,6 +98,7 @@ nodes. This will enable your edges to be build without the need for address reso
 the case in NRL's CORE).
 =end
 def edgeb(cmd)
+	puts "in main edgeb"
 	if($routing_table.has_key?(cmd[2]) && $routing_table[cmd[2]][1] == 1)
 		return nil
 	else
@@ -166,8 +168,6 @@ def edgeu(cmd)
 	if($routing_table.has_key(cmd[0]) && (cmd[1] >= -2147483648 && cmd[1] <= 2147483647))
 		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
 	end
-
-
 end
 
 =begin
@@ -289,7 +289,7 @@ def setup(hostname, port, nodes, config)
 	}
 
 	t2 = Thread.new{
-		clock(config_map["updateInterval"])
+		clock($config_map["updateInterval"])
 	}
 
     t3 = Thread.new {
@@ -308,6 +308,7 @@ def node_listener(port)
 
 		if temp[0] = "LINKSTATE"
 			linkstate(line)
+		end
 
 		temp[0] = $commands[temp[0]]
 
@@ -330,7 +331,7 @@ def node_listener(port)
 end
 
 def clock(update_interval)
-	$sleep_interval =  update_interval / 2
+	$sleep_interval =  update_interval
 	$clock_semaphore = Mutex.new
 	$clock = Time.now
 	while(true)
@@ -338,10 +339,13 @@ def clock(update_interval)
 		$clock_semaphore.synchronize{
 			$clock = $clock + $sleep_interval
 		}
+		#puts "clock incremented to " + $clock.to_s
+
 	end
 end
 
 def task_thread()
+	puts "task thread started"
     task_clock = nil
     $clock_semaphore.synchronize {
         task_clock = $clock
@@ -363,8 +367,8 @@ def task_thread()
             # Synchronize the thread using mutex
             $queue_semaphore.synchronize {
                 # If there are tasks to do, execute them
-                if (!task_queue.empty?)
-                    task = task_queue.pop
+                if (!$task_queue.empty?)
+                    task = $task_queue.pop
                     cmd = task[1..-1]
                     queue_flag = true
                 else
@@ -375,10 +379,11 @@ def task_thread()
             # the tasks that are enqueued
             if queue_flag
                 if task[0] == :status
+                	puts "status recieved in task thread"
                     status()
 
                 elsif task[0] == :edgeb
-                	#puts "EDGEB Received"
+                	puts "EDGEB Received, in task thread"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
 					$routing_table[cmd[1]] = [cmd[1], 1]
