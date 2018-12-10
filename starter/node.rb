@@ -1,9 +1,6 @@
 require 'socket'
 require 'csv'
-<<<<<<< HEAD
 require 'set'
-=======
->>>>>>> 3a812a78b6c8a4d278079753dad1502bdbf43728
 require 'thread'
 
 Thread.abort_on_exception = true
@@ -431,11 +428,7 @@ def task_thread()
     while (true)
         time_flag = nil
         $clock_semaphore.synchronize {
-<<<<<<< HEAD
             if (($clock - task_clock) >= $config_map["updateInterval"] * 2)
-=======
-            if (($clock - task_clock) >= $config_map["updateInterval"]*2)
->>>>>>> 3a812a78b6c8a4d278079753dad1502bdbf43728
                 time_flag = true
                 task_clock = $clock
             else
@@ -444,7 +437,6 @@ def task_thread()
         }
         if time_flag
             # Do something for link state
-<<<<<<< HEAD
             task_clock = $clock
             if runls
               linkstate(nil)
@@ -452,8 +444,6 @@ def task_thread()
               dijkstra($LStable)
             end
             runls = !runls
-=======
->>>>>>> 3a812a78b6c8a4d278079753dad1502bdbf43728
         else
             queue_flag = nil
             # Synchronize the thread using mutex
