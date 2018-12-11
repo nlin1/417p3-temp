@@ -10,6 +10,7 @@ $port = nil
 $hostname = nil
 $peers = {}
 $LStable = Hash.new
+$recentLSPacket = Hash.new
 $task_queue = Array.new
 $queue_semaphore = Mutex.new
 $current_linkstate = 0
@@ -28,7 +29,8 @@ $commands = {
     "TRACEROUTE" => :traceroute,
     "FTP" => :ftp,
     "CIRCUIT" => :circuit,
-    "LINKSTATE" => :linkstate
+    "LINKSTATE" => :linkstate,
+  "ROUTES" => :routes
 }
 
 #dst -> nexthop, dist
@@ -56,18 +58,19 @@ end
 #STRUCTURE OF LINKSTATE PACKET
 #LINKSTATE, LSnum, SENDER NODE, AGE, PEER1, COST1, PEER2, COST2, etc.
 def linkstate(msg)
-	temp = []
 	if msg == nil
 		$current_linkstate += 1
-		packet = "LINKSTATE " + $current_linkstate + " " + $hostname + " 20 "
+		packet = "LINKSTATE " + $current_linkstate.to_s + " " + $hostname + " 20 "
 		# packet[0] = "LINKSTATE"
 		# packet[1] = $current_linkstate
 		# packet[2] = $hostname
 		# packet[3] = "20"
 	   	$peers.each do |node, peer|
-	   		packet += peer.hostname + " " + $routing_table[peer.hostname][1] + " "
+	   		packet = packet + peer.hostname + " " + $routing_table[peer.hostname][1].to_s + " "
 	   	end
+          temp = [nil, $current_linkstate]
 	else
+          puts "Rec"
 		packet = msg
 		temp = msg.split(' ')
 		if !$LStable.has_key?(temp[1])
@@ -78,37 +81,53 @@ def linkstate(msg)
 			return;
 		else	#otherwise keep packet
 			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
+                  $recentLSPacket[temp[2]] = temp[3..-1]
 		end
 	end
+  
    	$peers.each do |node, peer|
-   		if(msg != nil && temp[2] != peer.hostname) #send to peers besides sender
-   			peer.sock.puts(packet)
+   		if(temp[2] != peer.hostname) #send to peers besides sender
+   			peer.sock.write(packet)
+                        peer.sock.flush
    		end
    	end
-   	$current_linkstate = temp[1]
+   	$current_linkstate = temp[1].to_i
 end
 
-def dijkstra(table)
+def dijkstra(tbl)
+  table = tbl
   localhost = Peer.new("127.0.0.1", @hostname, nil)
   dist = Hash.new
   visited = Set.new
   nextNode = Queue.new
-  dist[localhost] = 0
+  dist[@hostname] = 0
   parent = Hash.new
+  parent[@hostname] = -1
   $routing_table.each do |dest, val|
     dist[dest] = -1
   end
+  $peers.each do |key, val|
+    nextNode.push(key)
+    parent[key] = @hostname
+  end
   while !nextNode.empty?
-    nextHop = minDist(dist, nextNode)
-    if visited.contains? nextHop
+    nextHop = nextNode.pop
+    #nextHop = minDist(dist, nextNode)
+    if visited.member? nextHop 
       next
     else
       visited.add(nextHop)
-      nextHopName = nextHop.hostname
+      nextHopName = nextHop
       neighborsList = table[nextHopName]
+      if neighborsList == nil
+        neighborsList = []
+      end
       neighbors = Hash.new
       for i in (0...neighborsList.length).step(2)
         neighbors[neighborsList[i]] = neighborsList[i + 1]
+        if !$routing_table.has? neighborsList[i]
+          $routing_table[neighborsList[i]] = [-1, nil]
+        end
       end
       neighbors.each do |n|
         name = getNodeFromName(n)
@@ -127,7 +146,7 @@ def dijkstra(table)
 end
 
 def getNextHop(parent, node)
-  if parent[parent[node]] == -1
+  if parent[parent[node]] == -1 || parent[node] == -1
     return node
   end
   getNextHop(parent, parent[node])
@@ -154,6 +173,13 @@ def minDist(distTable, queue)
     end
   end
   return min
+end
+
+def routes(cmd)
+  $routing_table.each do |key, value|
+    print key + ", "
+  end
+  puts ""
 end
 
 # --------------------- Part 1 --------------------- #
@@ -250,6 +276,7 @@ Neighbors: <lexicographically sorted list of neighbors, separated with commas an
 def status()
 	first = true
 	print "Name: " + $hostname + "\nPort: " + $port + "\nNeighbors: "
+=begin
 	$routing_table.sort_by{|k,v| k}.each do |dst, nhop|
 		if dst == nhop[0] #checks if node is direct neighbor
 			if !first
@@ -260,6 +287,15 @@ def status()
 			print dst
 		end
 	end
+=end
+  $peers.each do |peer, _|
+    if !first
+      print ","
+    else
+      first = false
+    end
+    print peer
+  end
 	print "\n"
 	STDOUT.flush
 end
@@ -347,6 +383,7 @@ def main()
 		when "TRACEROUTE"; traceroute(args)
 		when "FTP"; ftp(args);
 		when "CIRCUIT"; circuit(args);
+                when "ROUTES"; routes(args);
 		else STDERR.puts "ERROR: INVALID COMMAND \"#{cmd}\""
 		end
 	end
@@ -394,7 +431,24 @@ end
 
 def node_listener(port)
 	server = TCPServer.new port
+  rp, wp = IO.pipe
 	while $shutdown_flag == false do
+          rs, ws = IO.select([rp], [wp])
+          rs.each do |sock|
+              puts sock
+              line = sock.gets
+              temp = line.split(" ")
+              if temp[0] == "LINKSTATE"
+			linkstate(line)
+		end
+		puts temp[0] + " " + $commands[temp[0]].to_s
+
+		temp[0] = $commands[temp[0]]
+
+		$queue_semaphore.synchronize{
+			$task_queue.push(temp)
+		}
+          end
 		client = server.accept
 		line = client.gets
 		temp = line.split(" ")
@@ -420,7 +474,7 @@ def node_listener(port)
 		# 	STDOUT.flush
 		# end
 
-		client.close
+		#client.close
 	end
 	server.close
 end
@@ -447,6 +501,7 @@ def task_thread()
     $clock_semaphore.synchronize {
         task_clock = $clock
     }
+    runls = true
     while (true)
         time_flag = nil
         $clock_semaphore.synchronize {
@@ -459,6 +514,13 @@ def task_thread()
         }
         if time_flag
             # Do something for link state
+            task_clock = $clock
+            if runls
+              linkstate(nil)
+            else
+              dijkstra($recentLSPacket)
+            end
+            runls = !runls
         else
             queue_flag = nil
             # Synchronize the thread using mutex
