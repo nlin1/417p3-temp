@@ -168,7 +168,7 @@ nodes. This will enable your edges to be build without the need for address reso
 the case in NRL's CORE).
 =end
 def edgeb(cmd)
-	puts "in main edgeb"
+	#puts "in main edgeb"
 	if($routing_table.has_key?(cmd[2]) && $routing_table[cmd[2]][1] == 1)
 		return nil
 	else
@@ -399,12 +399,12 @@ def node_listener(port)
 		line = client.gets
 		temp = line.split(" ")
 
-		puts "" + $hostname + " recieved packet: " + line
+		#puts "" + $hostname + " recieved packet: " + line
 
 		if temp[0] == "LINKSTATE"
 			linkstate(line)
 		end
-		puts temp[0] + " " + $commands[temp[0]].to_s
+		#puts temp[0] + " " + $commands[temp[0]].to_s
 
 		temp[0] = $commands[temp[0]]
 
@@ -440,7 +440,7 @@ def clock(update_interval)
 end
 
 def task_thread()
-	puts "task thread started"
+	#puts "task thread started"
     task_clock = nil
     temp = ""
     task = []
@@ -466,7 +466,7 @@ def task_thread()
             $queue_semaphore.synchronize {
                 # If there are tasks to do, execute them
                 if ($task_queue.first != nil)
-                	puts "found item in task queue"
+                	#puts "found item in task queue"
                     temp = $task_queue.shift
                     task = temp.split(" ")
                     cmd = task[1..-1]
@@ -479,7 +479,7 @@ def task_thread()
             # the tasks that are enqueued
             if queue_flag
                 if task[0] == :edgeb
-                	puts "EDGEB Received, in task thread"
+                	#puts "EDGEB Received, in task thread"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
 					$routing_table[cmd[1]] = [cmd[1], 1]
