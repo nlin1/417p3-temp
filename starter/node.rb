@@ -272,7 +272,7 @@ end
  Description: This method will deliver the string MSG to the process running on DST.
 =end
 def sendmsg(cmd)
-	STDOUT.puts "SENDMSG: not implemented"
+	$peers[routing_table[cmd[0]][0]].sock.puts "" + cmd[0] + " "
 end
 
 =begin
@@ -412,7 +412,6 @@ def node_listener(port)
 			$task_queue.push(line)
 		}
 
-
 		# if temp[0] == "EDGEB"
 		# 	#puts "EDGEB Received"
 		# 	t_sock = TCPSocket.new temp[1], temp[3].to_i
@@ -485,7 +484,7 @@ def task_thread()
 					$routing_table[cmd[1]] = [cmd[1], 1]
 					STDOUT.flush
 
-				elsif task[0] == :linkstate
+				elsif task[0] == :sendmsg
 
 				#cmd: dst, sender, seq num, returning flag, ping num
 				elsif task[0] == :ping
