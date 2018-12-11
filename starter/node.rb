@@ -406,7 +406,24 @@ end
 
 def node_listener(port)
 	server = TCPServer.new port
+  rp, wp = IO.pipe
 	while $shutdown_flag == false do
+          rs, ws = IO.select([rp], [wp])
+          rs.each do |sock|
+              puts sock
+              line = sock.gets
+              temp = line.split(" ")
+              if temp[0] == "LINKSTATE"
+			linkstate(line)
+		end
+		puts temp[0] + " " + $commands[temp[0]].to_s
+
+		temp[0] = $commands[temp[0]]
+
+		$queue_semaphore.synchronize{
+			$task_queue.push(temp)
+		}
+          end
 		client = server.accept
 		line = client.gets
 		temp = line.split(" ")
