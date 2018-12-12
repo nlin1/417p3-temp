@@ -87,8 +87,9 @@ def linkstate(msg)
   
    	$peers.each do |node, peer|
    		if(temp[2] != peer.hostname) #send to peers besides sender
+   			puts "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet
    			peer.sock.write(packet)
-                        peer.sock.flush
+            peer.sock.flush
    		end
    	end
    	$current_linkstate = temp[1].to_i
@@ -110,7 +111,7 @@ def dijkstra(tbl)
     nextNode.push(key)
     parent[key] = @hostname
   end
-  puts "Next Nodes: " + nextNode.to_s
+  #puts "Next Nodes: " + nextNode.to_s
   while !nextNode.empty?
     nextHop = nextNode.pop
     #nextHop = minDist(dist, nextNode)
@@ -203,8 +204,11 @@ def edgeb(cmd)
 	end
   puts cmd
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
+	sock.sync = true
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
+	puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
+
 	return 0
 end
 
@@ -432,30 +436,20 @@ def setup(hostname, port, nodes, config)
 end
 
 def node_listener(port)
+	i = 0
 	server = TCPServer.new port
-  rp, wp = IO.pipe
+ #  	rp, wp = IO.pipe
+ 	client = server.accept
+
+ 	puts "Server " + $hostname + " connected to " + client.to_s 
+
 	while $shutdown_flag == false do
-          rs, ws = IO.select([rp], [wp])
-          rs.each do |sock|
-              puts sock
-              line = sock.gets
-              temp = line.split(" ")
-              if temp[0] == "LINKSTATE"
-			linkstate(line)
-		end
-		puts temp[0] + " " + $commands[temp[0]].to_s
 
-		temp[0] = $commands[temp[0]]
-
-		$queue_semaphore.synchronize{
-			$task_queue.push(temp)
-		}
-          end
-		client = server.accept
 		line = client.gets
 		temp = line.split(" ")
 
-		#puts "" + $hostname + " recieved packet: " + line
+		puts "count = " + i.to_s + " host: " + $hostname + " recieved packet: " + line
+		i+=1
 
 		if temp[0] == "LINKSTATE"
 			linkstate(line)
@@ -545,7 +539,9 @@ def task_thread()
                 if task[0] == :edgeb
                 	puts "EDGEB Received, in task thread"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
+					t_sock.sync = true
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
+					puts "Sockfd: " + t_sock.to_s + " connected to peer " + cmd[1].to_s
 					$routing_table[cmd[1]] = [cmd[1], 1]
 					STDOUT.flush
 

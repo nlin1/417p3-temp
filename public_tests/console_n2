@@ -1,1 +1,13 @@
-task thread started
+n2 recieved packet: EDGEB 127.0.0.1 n1 24178
+EDGEB Received, in task thread
+Sockfd: #<TCPSocket:0x92bce84> connected to peer n1
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 5 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 6 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 7 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 8 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 9 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 10 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 11 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 12 n2 20 n1 n1 
+n2 recieved packet: LINKSTATE 5 n1 20 n2 n2 LINKSTATE 6 n1 20 n2 n2 LINKSTATE 7 n1 20 n2 n2 LINKSTATE 8 n1 20 n2 n2 LINKSTATE 9 n1 20 n2 n2 LINKSTATE 10 n1 20 n2 n2 LINKSTATE 11 n1 20 n2 n2 LINKSTATE 12 n1 20 n2 n2 
+Rec
