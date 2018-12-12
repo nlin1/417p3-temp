@@ -110,6 +110,7 @@ def dijkstra(tbl)
     nextNode.push(key)
     parent[key] = @hostname
   end
+  puts "Next Nodes: " + nextNode.to_s
   while !nextNode.empty?
     nextHop = nextNode.pop
     #nextHop = minDist(dist, nextNode)
@@ -200,6 +201,7 @@ def edgeb(cmd)
 	else
 		$routing_table[cmd[2]] = [cmd[2], 1]
 	end
+  puts cmd
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
@@ -532,6 +534,7 @@ def task_thread()
                     task = temp.split(" ")
                     cmd = task[1..-1]
                     queue_flag = true
+                    task[0] = $commands[task[0]]
                 else
                     queue_flag = false
                 end
@@ -540,7 +543,7 @@ def task_thread()
             # the tasks that are enqueued
             if queue_flag
                 if task[0] == :edgeb
-                	#puts "EDGEB Received, in task thread"
+                	puts "EDGEB Received, in task thread"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
 					$routing_table[cmd[1]] = [cmd[1], 1]
@@ -575,7 +578,7 @@ def task_thread()
 					end
 
                 else
-                    send(task[0], cmd)
+                    send($commands[task[0]], cmd)
                 end
 
                 task.clear
