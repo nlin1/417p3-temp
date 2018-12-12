@@ -88,7 +88,7 @@ def linkstate(msg)
    	$peers.each do |node, peer|
    		if(temp[2] != peer.hostname) #send to peers besides sender
    			puts "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet
-   			peer.sock.write(packet)
+   			peer.sock.puts(packet)
             peer.sock.flush
    		end
    	end
@@ -574,7 +574,7 @@ def task_thread()
 					end
 
                 else
-                    send($commands[task[0]], cmd)
+                    #send($commands[task[0]], cmd)
                 end
 
                 task.clear
