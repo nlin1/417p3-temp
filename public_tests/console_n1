@@ -1,1 +1,12 @@
-task thread started
+127.0.0.1
+127.0.0.1
+n2
+Sockfd: #<TCPSocket:0x95c9bb8> connected to peer n2
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 5 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 6 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 7 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 8 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 9 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 10 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 11 n1 20 n2 n2 
+Attempting to write to n2 on sockfd #<TCPSocket:0x95c9bb8> packet LINKSTATE 12 n1 20 n2 n2 
