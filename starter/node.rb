@@ -81,7 +81,7 @@ def linkstate(msg)
 			return;
 		else	#otherwise keep packet
 			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
-                  $recentLSPacket[temp[2]] = temp[3..-1]
+                  $recentLSPacket[temp[2]] = temp[4..-1]
 		end
 	end
   
@@ -126,19 +126,20 @@ def dijkstra(tbl)
       end
       neighbors = Hash.new
       for i in (0...neighborsList.length).step(2)
-        neighbors[neighborsList[i]] = neighborsList[i + 1]
-        if !$routing_table.has? neighborsList[i]
+        neighbors[neighborsList[i]] = neighborsList[i + 1].to_i
+        if !$routing_table.key? neighborsList[i]
           $routing_table[neighborsList[i]] = [-1, nil]
+          dist[neighborsList[i]] = -1
         end
       end
-      neighbors.each do |n|
-        name = getNodeFromName(n)
-        nextNode.add(name)
-        distuTov = neighbors[n]
-        if dist[name] > dist[nextHop] + distuTov || dist[name] == -1
-          dist[name] = dist[nextHop] + distuTov
-          parent[name] = nextHop
+      neighbors.each do |n, v|
+        nextNode.push(n)
+        distuTov = v
+        if dist[n] > dist[nextHop] + distuTov || dist[n] == -1
+          dist[n] = dist[nextHop] + distuTov
+          parent[n] = nextHop
         end
+        puts "wjat"
       end
     end
   end
@@ -157,7 +158,7 @@ end
 def getNodeFromName(hostname)
   res = nil
   $routing_table.each do |key, _|
-    if key.hostname == hostname
+    if key == hostname
       res = key
       break
     end
@@ -438,21 +439,23 @@ end
 def node_listener(port)
 	i = 0
 	server = TCPServer.new port
- #  	rp, wp = IO.pipe
- 	client = server.accept
-
- 	puts "Server " + $hostname + " connected to " + client.to_s 
-
+  	rp, wp = IO.pipe
 	while $shutdown_flag == false do
+          begin
+              	client = server.accept_nonblock
+
+                puts "Server " + $hostname + " connected to " + client.to_s 
 
 		line = client.gets
 		temp = line.split(" ")
 
 		puts "count = " + i.to_s + " host: " + $hostname + " recieved packet: " + line
-		i+=1
+		i += 1
 
 		if temp[0] == "LINKSTATE"
+                  $queue_semaphore.synchronize {
 			linkstate(line)
+                   }
 		end
 		#puts temp[0] + " " + $commands[temp[0]].to_s
 
@@ -461,6 +464,25 @@ def node_listener(port)
 		$queue_semaphore.synchronize{
 			$task_queue.push(line)
 		}
+
+            rescue
+              rs, ws = IO.select([rp], [wp])
+              rs.each do |sock|
+                line = sock.gets
+                temp = line.split(" ")
+                if temp[0] == "LINKSTATE"
+                  $queue_semaphore.synchronize {
+                    linkstate(line)
+                  }
+                else
+                  puts temp[0] + " " + $commands[temp[0]].to_s
+                  temp[0] = $commands[temp[0]]
+                  $queue_semaphore.synchronize {
+                    $task_queue.push(temp)
+                  }
+              end
+            end
+            end
 
 		# if temp[0] == "EDGEB"
 		# 	#puts "EDGEB Received"
