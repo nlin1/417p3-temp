@@ -1,13 +1,16 @@
-n2 recieved packet: EDGEB 127.0.0.1 n1 24178
+Server n2 connected to #<TCPSocket:0x8a7d37c>
+count = 0 host: n2 recieved packet: EDGEB 127.0.0.1 n1 24178
 EDGEB Received, in task thread
-Sockfd: #<TCPSocket:0x92bce84> connected to peer n1
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 5 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 6 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 7 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 8 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 9 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 10 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 11 n2 20 n1 n1 
-Attempting to write to n1 on sockfd #<TCPSocket:0x92bce84> packet LINKSTATE 12 n2 20 n1 n1 
-n2 recieved packet: LINKSTATE 5 n1 20 n2 n2 LINKSTATE 6 n1 20 n2 n2 LINKSTATE 7 n1 20 n2 n2 LINKSTATE 8 n1 20 n2 n2 LINKSTATE 9 n1 20 n2 n2 LINKSTATE 10 n1 20 n2 n2 LINKSTATE 11 n1 20 n2 n2 LINKSTATE 12 n1 20 n2 n2 
-Rec
+Sockfd: #<TCPSocket:0x8afa124> connected to peer n1
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 877 n2 20 n1 1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 878 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 879 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 880 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 881 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 882 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 883 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 884 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 885 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 886 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 887 n2 20 n1 n1 
+Attempting to write to n1 on sockfd #<TCPSocket:0x8afa124> packet LINKSTATE 888 n2 20 n1 n1 

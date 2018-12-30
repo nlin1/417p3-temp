@@ -68,9 +68,8 @@ def linkstate(msg)
 	   	$peers.each do |node, peer|
 	   		packet = packet + peer.hostname + " " + $routing_table[peer.hostname][1].to_s + " "
 	   	end
-          temp = [nil, $current_linkstate]
+        temp = [nil, $current_linkstate]
 	else
-          puts "Rec"
 		packet = msg
 		temp = msg.split(' ')
 		if !$LStable.has_key?(temp[1])
@@ -78,14 +77,17 @@ def linkstate(msg)
 		end
 
 		if $LStable[temp[1]].has_key?(temp[2]) #if we have the packet already
-			return;
+			puts "found pre-existing packet"
+			return
 		else	#otherwise keep packet
 			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
-                  $recentLSPacket[temp[2]] = temp[4..-1]
+            $recentLSPacket[temp[2]] = temp[4..-1]
+            $current_linkstate = temp[0]
 		end
 	end
   
    	$peers.each do |node, peer|
+
    		if(temp[2] != peer.hostname) #send to peers besides sender
    			puts "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet
    			peer.sock.puts(packet)
@@ -93,6 +95,7 @@ def linkstate(msg)
    		end
    	end
    	$current_linkstate = temp[1].to_i
+   	packet.clear
 end
 
 def dijkstra(tbl)
@@ -139,7 +142,7 @@ def dijkstra(tbl)
           dist[n] = dist[nextHop] + distuTov
           parent[n] = nextHop
         end
-        puts "wjat"
+        #puts "wjat"
       end
     end
   end
@@ -439,60 +442,67 @@ end
 def node_listener(port)
 	i = 0
 	server = TCPServer.new port
-  	rp, wp = IO.pipe
-	while $shutdown_flag == false do
-          begin
-              	client = server.accept_nonblock
+  	#rp, wp = IO.pipe
 
-                puts "Server " + $hostname + " connected to " + client.to_s 
+  	loop do
 
-		line = client.gets
-		temp = line.split(" ")
+	  	Thread.start(server.accept) do |client|
+	    
+			while $shutdown_flag == false do
 
-		puts "count = " + i.to_s + " host: " + $hostname + " recieved packet: " + line
-		i += 1
+				#puts "Server " + $hostname + " connected to " + client.to_s 
+	              
+				line = client.gets
+				temp = line.split(" ")
 
-		if temp[0] == "LINKSTATE"
-                  $queue_semaphore.synchronize {
-			linkstate(line)
-                   }
+				puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
+				i += 1
+
+				if temp[0] == "LINKSTATE"
+		            $queue_semaphore.synchronize {
+						linkstate(line)
+		            }
+				else
+					#puts temp[0] + " " + $commands[temp[0]].to_s
+
+					temp[0] = $commands[temp[0]]
+
+					$queue_semaphore.synchronize{
+						$task_queue.push(line)
+					}
+				end
+
+			end
+
+	            # rescue
+	            #   rs, ws = IO.select([rp], [wp])
+	            #   rs.each do |sock|
+	            #     line = sock.gets
+	            #     temp = line.split(" ")
+	            #     if temp[0] == "LINKSTATE"
+	            #       $queue_semaphore.synchronize {
+	            #         linkstate(line)
+	            #       }
+	            #     else
+	            #       puts temp[0] + " " + $commands[temp[0]].to_s
+	            #       temp[0] = $commands[temp[0]]
+	            #       $queue_semaphore.synchronize {
+	            #         $task_queue.push(temp)
+	            #       }
+	            #   end
+	            # end
+	            # end
+
+			# if temp[0] == "EDGEB"
+			# 	#puts "EDGEB Received"
+			# 	t_sock = TCPSocket.new temp[1], temp[3].to_i
+			# 	$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
+			# 	$routing_table[temp[2]] = [temp[2], 1]
+			# 	STDOUT.flush
+			# end
+
+			#client.close
 		end
-		#puts temp[0] + " " + $commands[temp[0]].to_s
-
-		temp[0] = $commands[temp[0]]
-
-		$queue_semaphore.synchronize{
-			$task_queue.push(line)
-		}
-
-            rescue
-              rs, ws = IO.select([rp], [wp])
-              rs.each do |sock|
-                line = sock.gets
-                temp = line.split(" ")
-                if temp[0] == "LINKSTATE"
-                  $queue_semaphore.synchronize {
-                    linkstate(line)
-                  }
-                else
-                  puts temp[0] + " " + $commands[temp[0]].to_s
-                  temp[0] = $commands[temp[0]]
-                  $queue_semaphore.synchronize {
-                    $task_queue.push(temp)
-                  }
-              end
-            end
-            end
-
-		# if temp[0] == "EDGEB"
-		# 	#puts "EDGEB Received"
-		# 	t_sock = TCPSocket.new temp[1], temp[3].to_i
-		# 	$peers[temp[2]] = Peer.new(temp[1], temp[2], t_sock)
-		# 	$routing_table[temp[2]] = [temp[2], 1]
-		# 	STDOUT.flush
-		# end
-
-		#client.close
 	end
 	server.close
 end
@@ -536,7 +546,7 @@ def task_thread()
             if runls
               linkstate(nil)
             else
-              dijkstra($recentLSPacket)
+              #dijkstra($recentLSPacket)
             end
             runls = !runls
         else
