@@ -393,7 +393,7 @@ def main()
 		when "TRACEROUTE"; traceroute(args)
 		when "FTP"; ftp(args);
 		when "CIRCUIT"; circuit(args);
-                when "ROUTES"; routes(args);
+        when "ROUTES"; routes(args);
 		else STDERR.puts "ERROR: INVALID COMMAND \"#{cmd}\""
 		end
 	end
