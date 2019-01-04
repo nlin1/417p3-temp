@@ -16,6 +16,7 @@ $queue_semaphore = Mutex.new
 $current_linkstate = 0
 $pings = {}
 $traceroutes = {}
+$logfile = nil
 
 $commands = {
     "DUMPTABLE" => :dumptable,
@@ -112,9 +113,11 @@ def dijkstra(tbl)
   end
   $peers.each do |key, val|
     nextNode.push(key)
+    dist[key] = $routing_table[key][0]
     parent[key] = @hostname
   end
-  #puts "Next Nodes: " + nextNode.to_s
+  message = "Next Nodes - " + nextNode.size.to_s
+  #log($logfile, "dijkstra", message)
   while !nextNode.empty?
     nextHop = nextNode.pop
     #nextHop = minDist(dist, nextNode)
@@ -130,15 +133,16 @@ def dijkstra(tbl)
       neighbors = Hash.new
       for i in (0...neighborsList.length).step(2)
         neighbors[neighborsList[i]] = neighborsList[i + 1].to_i
-        if !$routing_table.key? neighborsList[i]
-          $routing_table[neighborsList[i]] = [-1, nil]
-          dist[neighborsList[i]] = -1
+        if !dist.key? neighborsList[i]
+          $dist[neighborsList[i]] = -1
         end
       end
       neighbors.each do |n, v|
         nextNode.push(n)
         distuTov = v
         if dist[n] > dist[nextHop] + distuTov || dist[n] == -1
+          log($logfile, "dijkstra", "dist[nextHop]->" + dist[nextHop].class)
+          log($logfile, "dijkstra", "distuTov->" + distuTov)
           dist[n] = dist[nextHop] + distuTov
           parent[n] = nextHop
         end
@@ -146,6 +150,7 @@ def dijkstra(tbl)
       end
     end
   end
+  log($logfile, "dijkstra", dist.to_s)
   $routing_table.each do |key, value|
     $routing_table[key] = [dist[key], getNextHop(parent, key)]
   end
@@ -188,6 +193,20 @@ def routes(cmd)
   puts ""
 end
 
+def log(logFile, functionName, message)
+  time = nil
+  $clock_semaphore.synchronize {
+    time = $clock
+  }
+  message = functionName + " " + time.to_s + ": " + message + "\n"
+  if !File.exists? logFile
+    File.new(logFile, "a+")
+  end
+  File.open(logFile, "a+") do |file|
+    file << message
+  end
+end
+
 # --------------------- Part 1 --------------------- #
 
 =begin
@@ -206,13 +225,11 @@ def edgeb(cmd)
 	else
 		$routing_table[cmd[2]] = [cmd[2], 1]
 	end
-  puts cmd
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	sock.sync = true
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
 	puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
-
 	return 0
 end
 
@@ -226,9 +243,6 @@ file name will not include a leading \./"
 =end
 def dumptable(cmd)
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
-	if File.exist? name then
-		File.delete(name)
-	end
 	File.new(name, "w")
 	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
@@ -407,6 +421,7 @@ def setup(hostname, port, nodes, config)
 	$config_map = {}
 	$clock_semaphore = Mutex.new
 	$clock = Time.now
+        $logfile = "log" + $hostname + ".txt"
 
 	#set up ports, server, buffers
 
@@ -546,7 +561,7 @@ def task_thread()
             if runls
               linkstate(nil)
             else
-              #dijkstra($recentLSPacket)
+              dijkstra($recentLSPacket)
             end
             runls = !runls
         else
