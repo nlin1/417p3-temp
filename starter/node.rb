@@ -113,7 +113,8 @@ def dijkstra(tbl)
   end
   $peers.each do |key, val|
     nextNode.push(key)
-    dist[key] = $routing_table[key][0]
+    dist[key] = $routing_table[key][1]
+    #log($logfile, "dijkstra", "dist[key]=" + $routing_table[key][1].to_s)
     parent[key] = @hostname
   end
   message = "Next Nodes - " + nextNode.size.to_s
@@ -132,17 +133,18 @@ def dijkstra(tbl)
       end
       neighbors = Hash.new
       for i in (0...neighborsList.length).step(2)
+        #log($logfile, "dijkstra", "neighborsList[i + 1]=" + neighborsList[i + 1])
         neighbors[neighborsList[i]] = neighborsList[i + 1].to_i
         if !dist.key? neighborsList[i]
-          $dist[neighborsList[i]] = -1
+          dist[neighborsList[i]] = -1
         end
       end
       neighbors.each do |n, v|
         nextNode.push(n)
         distuTov = v
+        #log($logfile, "dijkstra", "dist[nextHop]->" + dist[nextHop].class.to_s)
+        #log($logfile, "dijkstra", "distuTov->" + distuTov.class.to_s)
         if dist[n] > dist[nextHop] + distuTov || dist[n] == -1
-          log($logfile, "dijkstra", "dist[nextHop]->" + dist[nextHop].class)
-          log($logfile, "dijkstra", "distuTov->" + distuTov)
           dist[n] = dist[nextHop] + distuTov
           parent[n] = nextHop
         end
@@ -150,10 +152,13 @@ def dijkstra(tbl)
       end
     end
   end
-  log($logfile, "dijkstra", dist.to_s)
-  $routing_table.each do |key, value|
-    $routing_table[key] = [dist[key], getNextHop(parent, key)]
+  #log($logfile, "dijkstra", dist.to_s)
+  dist.each do |key, value|
+    unless key.nil? || key == $hostname
+      $routing_table[key] = [getNextHop(parent, key), dist[key]]
+    end
   end
+  log($logfile, "dijkstra", $routing_table.to_s)
 end
 
 def getNextHop(parent, node)
@@ -620,8 +625,8 @@ def task_thread()
 						puts cmd[1] + " " + cmd[4] + " " + cmd[3]
 					end
 
-                else
-                    #send($commands[task[0]], cmd)
+                elsif (task != nil)
+                    send($commands[task[0]], cmd)
                 end
 
                 task.clear
