@@ -78,7 +78,7 @@ def linkstate(msg)
 		end
 
 		if $LStable[temp[1]].has_key?(temp[2]) #if we have the packet already
-			puts "found pre-existing packet"
+			log($logfile, "linkstate", "found pre-existing packet")
 			return
 		else	#otherwise keep packet
 			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
@@ -90,7 +90,7 @@ def linkstate(msg)
    	$peers.each do |node, peer|
 
    		if(temp[2] != peer.hostname) #send to peers besides sender
-   			puts "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet
+   			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
    			peer.sock.puts(packet)
             peer.sock.flush
    		end
@@ -475,7 +475,7 @@ def node_listener(port)
 				line = client.gets
 				temp = line.split(" ")
 
-				puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
+				log($logfile, "node_listener", "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line)
 				i += 1
 
 				if temp[0] == "LINKSTATE"
