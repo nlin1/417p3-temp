@@ -318,7 +318,7 @@ end
  Description: This method will deliver the string MSG to the process running on DST.
 =end
 def sendmsg(cmd)
-	$peers[routing_table[cmd[0]][0]].sock.puts "" + cmd[0] + " "
+	$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG \"" + cmd[1] + "\""
 end
 
 =begin
@@ -329,11 +329,13 @@ be a delay of DELAY seconds between pings.
 def ping(cmd)
 	$pings.clear
 	ping_no = 0
+	puts "ping " + cmd[1] + "."
 	thr = Thread.new{
-		while ping_no > cmd[1]
-			#cmd: dst, sender, seq id, returning flag
-			$peers[routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + $hostname + " 0 false"
-			$pings[ping_no] = [$clock, false]
+		while ping_no < cmd[1].to_i
+			#cmd: dst, sender, seq id, returning flag, ping num
+			puts "Attempting to write PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
+			$peers[$routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
+			$pings[ping_no] = [Time.now, false]
 			ping_no += 1
 			sleep(cmd[2].to_i)
 			i = 0
@@ -347,6 +349,7 @@ def ping(cmd)
 		end
 	}
 	thr.join
+	ping_no = 0
 end
 
 =begin
@@ -355,7 +358,7 @@ end
 =end
 def traceroute(cmd)
 	#cmd: dst, hop, returning flag, time sent, sender
-	$peers[routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " 1 false " + $clock.to_i + " " + $hostname
+	$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " 1 false " + $clock.to_i + " " + $hostname
 	puts "0 " + $hostname + " 0"
 end
 
@@ -393,7 +396,7 @@ def main()
 		when "TRACEROUTE"; traceroute(args)
 		when "FTP"; ftp(args);
 		when "CIRCUIT"; circuit(args);
-                when "ROUTES"; routes(args);
+        when "ROUTES"; routes(args);
 		else STDERR.puts "ERROR: INVALID COMMAND \"#{cmd}\""
 		end
 	end
@@ -579,28 +582,28 @@ def task_thread()
 
 				elsif task[0] == :sendmsg
 
-				#cmd: dst, sender, seq num, returning flag, ping num
+				#cmd: dst, sender, seq num, returning flag
 				elsif task[0] == :ping
 					if cmd[0] != $hostname
-						$peers[routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + cmd[1] + " " + (cmd[2].to_i + 1) + " " + cmd[3] + " " + cmd[4]
+						$peers[$routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + cmd[1] + " " + cmd[2] + " " + cmd[3]
 					elsif cmd[0] == $hostname && cmd[3] == "false"
-						$peers[routing_table[cmd[1]][0]].sock.puts "PING " + cmd[1] + " " + $hostname + " " + (cmd[2].to_i + 1) + " true " + cmd[4]
+						$peers[$routing_table[cmd[1]][0]].sock.puts "PING " + cmd[1] + " " + $hostname + " " + cmd[2] + " true "
 					elsif cmd[0] == $hostname && cmd[3] == "true"
-						if $pings[cmd[4]][1] == false
-							puts cmd[2] + " " + cmd[1] + " " + $clock - $pings[cmd[4]][0]
-							$pings[cmd[4]][1] = true
+						if $pings[cmd[2].to_i][1] == false
+							puts cmd[2] + " " + cmd[1] + " " + (Time.now - $pings[cmd[2].to_i][0]).to_s
+							$pings[cmd[2].to_i][1] = true
 						end
 					end
 
 				#cmd: dst, hop, returning flag, time sent, sender
 				elsif task[0] == :traceroute
 					if cmd[0] != $hostname && cmd[2] == "false"
-						$peers[routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + (cmd[1].to_i + 1) + " " + cmd[2] + " " + cmd[3] + " " + cmd[4]
-						$peers[routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i) + " " + $hostname
+						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + (cmd[1].to_i + 1).to_s + " " + cmd[2] + " " + cmd[3] + " " + cmd[4]
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
 					elsif cmd[0] != $hostname && cmd[2] == "true"
-						$peers[routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
+						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
 					elsif cmd[0] == $hostname && cmd[2] == "false"
-						$peers[routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i) + " " + $hostname
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
 					elsif cmd[0] == $hostname && cmd[2] == "true"
 						puts cmd[1] + " " + cmd[4] + " " + cmd[3]
 					end
