@@ -16,6 +16,8 @@ $queue_semaphore = Mutex.new
 $current_linkstate = 0
 $pings = {}
 $traceroutes = {}
+$logfile = nil
+
 
 $commands = {
     "DUMPTABLE" => :dumptable,
@@ -77,7 +79,7 @@ def linkstate(msg)
 		end
 
 		if $LStable[temp[1]].has_key?(temp[2]) #if we have the packet already
-			puts "found pre-existing packet"
+			log($logfile, "linkstate", "found pre-existing packet")
 			return
 		else	#otherwise keep packet
 			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
@@ -89,7 +91,9 @@ def linkstate(msg)
    	$peers.each do |node, peer|
 
    		if(temp[2] != peer.hostname) #send to peers besides sender
-   			puts "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet
+
+   			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
+
    			peer.sock.puts(packet)
             peer.sock.flush
    		end
@@ -112,9 +116,12 @@ def dijkstra(tbl)
   end
   $peers.each do |key, val|
     nextNode.push(key)
+    dist[key] = $routing_table[key][1]
+    #log($logfile, "dijkstra", "dist[key]=" + $routing_table[key][1].to_s)
     parent[key] = @hostname
   end
-  #puts "Next Nodes: " + nextNode.to_s
+  message = "Next Nodes - " + nextNode.size.to_s
+  #log($logfile, "dijkstra", message)
   while !nextNode.empty?
     nextHop = nextNode.pop
     #nextHop = minDist(dist, nextNode)
@@ -129,15 +136,17 @@ def dijkstra(tbl)
       end
       neighbors = Hash.new
       for i in (0...neighborsList.length).step(2)
+        #log($logfile, "dijkstra", "neighborsList[i + 1]=" + neighborsList[i + 1])
         neighbors[neighborsList[i]] = neighborsList[i + 1].to_i
-        if !$routing_table.key? neighborsList[i]
-          $routing_table[neighborsList[i]] = [-1, nil]
+        if !dist.key? neighborsList[i]
           dist[neighborsList[i]] = -1
         end
       end
       neighbors.each do |n, v|
         nextNode.push(n)
         distuTov = v
+        #log($logfile, "dijkstra", "dist[nextHop]->" + dist[nextHop].class.to_s)
+        #log($logfile, "dijkstra", "distuTov->" + distuTov.class.to_s)
         if dist[n] > dist[nextHop] + distuTov || dist[n] == -1
           dist[n] = dist[nextHop] + distuTov
           parent[n] = nextHop
@@ -146,9 +155,13 @@ def dijkstra(tbl)
       end
     end
   end
-  $routing_table.each do |key, value|
-    $routing_table[key] = [dist[key], getNextHop(parent, key)]
+  #log($logfile, "dijkstra", dist.to_s)
+  dist.each do |key, value|
+    unless key.nil? || key == $hostname
+      $routing_table[key] = [getNextHop(parent, key), dist[key]]
+    end
   end
+  log($logfile, "dijkstra", $routing_table.to_s)
 end
 
 def getNextHop(parent, node)
@@ -186,6 +199,20 @@ def routes(cmd)
     print key + ", "
   end
   puts ""
+end
+
+def log(logFile, functionName, message)
+  time = nil
+  $clock_semaphore.synchronize {
+    time = $clock
+  }
+  message = functionName + " " + time.to_s + ": " + message + "\n"
+  if !File.exists? logFile
+    File.new(logFile, "a+")
+  end
+  File.open(logFile, "a+") do |file|
+    file << message
+  end
 end
 
 # --------------------- Part 1 --------------------- #
@@ -226,9 +253,6 @@ file name will not include a leading \./"
 =end
 def dumptable(cmd)
 	name = (cmd[0] =~ /\.\/*/) != nil ? cmd[0][2..-1] : cmd[0]
-	if File.exist? name then
-		File.delete(name)
-	end
 	File.new(name, "w")
 	CSV.open(name, "w") do |csv|
 		$routing_table.each { |k, v|
@@ -410,6 +434,7 @@ def setup(hostname, port, nodes, config)
 	$config_map = {}
 	$clock_semaphore = Mutex.new
 	$clock = Time.now
+  $logfile = "log" + $hostname + ".txt"
 
 	#set up ports, server, buffers
 
@@ -457,8 +482,7 @@ def node_listener(port)
 	              
 				line = client.gets
 				temp = line.split(" ")
-
-				puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
+				log($logfile, "node_listener", "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line)
 				i += 1
 
 				if temp[0] == "LINKSTATE"
@@ -469,7 +493,6 @@ def node_listener(port)
 					#puts temp[0] + " " + $commands[temp[0]].to_s
 
 					temp[0] = $commands[temp[0]]
-
 					$queue_semaphore.synchronize{
 						$task_queue.push(line)
 					}
@@ -549,7 +572,7 @@ def task_thread()
             if runls
               linkstate(nil)
             else
-              #dijkstra($recentLSPacket)
+              dijkstra($recentLSPacket)
             end
             runls = !runls
         else
@@ -607,7 +630,6 @@ def task_thread()
 					elsif cmd[0] == $hostname && cmd[2] == "true"
 						puts cmd[1] + " " + cmd[4] + " " + cmd[3]
 					end
-
                 else
                     #send($commands[task[0]], cmd)
                 end
