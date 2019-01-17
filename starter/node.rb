@@ -84,7 +84,7 @@ def linkstate(msg)
 		else	#otherwise keep packet
 			$LStable[temp[1]][temp[2]] = temp[3..-1] #list of nodes and
             $recentLSPacket[temp[2]] = temp[4..-1]
-            $current_linkstate = temp[0]
+            $current_linkstate = temp[0].to_i
 		end
 	end
   
@@ -342,7 +342,12 @@ end
  Description: This method will deliver the string MSG to the process running on DST.
 =end
 def sendmsg(cmd)
-	$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG \"" + cmd[1] + "\""
+	if $routing_table.has_key?(cmd[0])
+		concat = cmd[1..-1].join("_")
+		$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + $hostname + " " + concat
+	else
+		puts "SENDMSG ERROR: HOST UNREACHABLE"
+	end
 end
 
 =begin
@@ -351,6 +356,10 @@ end
 be a delay of DELAY seconds between pings.
 =end
 def ping(cmd)
+	if not $routing_table.has_key?(cmd[0])
+		puts "PING ERROR: HOST UNREACHABLE"
+		return
+	end
 	$pings.clear
 	ping_no = 0
 	puts "ping " + cmd[1] + "."
@@ -482,6 +491,7 @@ def node_listener(port)
 	              
 				line = client.gets
 				temp = line.split(" ")
+				#puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
 				log($logfile, "node_listener", "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line)
 				i += 1
 
@@ -603,19 +613,33 @@ def task_thread()
 					$routing_table[cmd[1]] = [cmd[1], 1]
 					STDOUT.flush
 
+				#cmd: dst, sender, msg
 				elsif task[0] == :sendmsg
+					if cmd[0] == "fail" && cmd[1] == $hostname
+						puts "SENDMSG ERROR: HOST UNREACHABLE"
+					elsif cmd[0] == $hostname #INTENDED BEHAVIOR
+						puts cmd[1] + " --> " + cmd[2].tr('_',' ')
+					elsif not $routing_table.has_key?(cmd[0])
+						$peers[$routing_table[cmd[1]][0]].sock.puts "SENDMSG fail " + cmd[1] + " *"
+					else
+						$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2]				
+					end
 
 				#cmd: dst, sender, seq num, returning flag
 				elsif task[0] == :ping
-					if cmd[0] != $hostname
-						$peers[$routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + cmd[1] + " " + cmd[2] + " " + cmd[3]
-					elsif cmd[0] == $hostname && cmd[3] == "false"
-						$peers[$routing_table[cmd[1]][0]].sock.puts "PING " + cmd[1] + " " + $hostname + " " + cmd[2] + " true "
-					elsif cmd[0] == $hostname && cmd[3] == "true"
+					if cmd[0] == "fail" && cmd[1] == $hostname
+						puts "PING ERROR: HOST UNREACHABLE"
+					elsif cmd[0] == $hostname && cmd[3] == "true" #INTENDED BEHAVIOR
 						if $pings[cmd[2].to_i][1] == false
 							puts cmd[2] + " " + cmd[1] + " " + (Time.now - $pings[cmd[2].to_i][0]).to_s
 							$pings[cmd[2].to_i][1] = true
 						end
+					elsif cmd[0] == $hostname && cmd[3] == "false"
+						$peers[$routing_table[cmd[1]][0]].sock.puts "PING " + cmd[1] + " " + $hostname + " " + cmd[2] + " true "
+					elsif not $routing_table.has_key?(cmd[0])
+						$peers[$routing_table[cmd[1]][0]].sock.puts "PING fail " + cmd[1] + " * *"
+					elsif cmd[0] != $hostname
+						$peers[$routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + cmd[1] + " " + cmd[2] + " " + cmd[3]
 					end
 
 				#cmd: dst, hop, returning flag, time sent, sender
