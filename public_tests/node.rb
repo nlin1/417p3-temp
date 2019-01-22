@@ -325,8 +325,8 @@ end
 node specified by DST.
 =end
 def edgeu(cmd)
-	if($routing_table.has_key(cmd[0]) && (cmd[1] >= -2147483648 && cmd[1] <= 2147483647))
-		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
+	if($routing_table.has_key?(cmd[0]) && (cmd[1].to_i >= -2147483648 && cmd[1].to_i <= 2147483647))
+		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1].to_i]
 	end
 end
 
@@ -491,7 +491,7 @@ def main()
 		case cmd
 		when "EDGEB"; edgeb(args) #part 0
 		when "EDGED"; edged(args)
-		when "EDGEU"; edgeU(args)
+		when "EDGEU"; edgeu(args)
 		when "DUMPTABLE"; dumptable(args) #part 0
 		when "SHUTDOWN"; shutdown(args)	#part0
 		when "STATUS"; status()
@@ -747,8 +747,8 @@ def task_thread()
 					elsif cmd[0] != $hostname && cmd[2] == "true"
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
 					end
-                elsif (task != nil)
-                    send($commands[task[0]], cmd)
+                #elsif (task != nil)
+                #    send($commands[task[0]], cmd)
                 end
 
                 task.clear
