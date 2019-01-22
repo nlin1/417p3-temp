@@ -18,6 +18,8 @@ $pings = {}
 $traceroutes = {}
 $logfile = nil
 
+$sendmsgBuffer = Hash.new
+
 
 $commands = {
     "DUMPTABLE" => :dumptable,
@@ -215,6 +217,37 @@ def log(logFile, functionName, message)
   end
 end
 
+
+#sendmsg fragmentation helpers
+def isFragment? msg
+  return msg.length == 5
+end
+
+def addToBuffer(msg)
+  src = msg[1]
+  message = msg[2]
+  id = msg[3].to_i
+  maxNum = msg[4].to_i
+  if !$sendmsgBuffer.key? src
+    $sendmsgBuffer[src] = Hash.new
+    $sendmsgBuffer[src]["max"] = maxNum
+    $sendmsgBuffer[src][id] = message
+  else
+    $sendmsgBuffer[src][id] = message
+  end
+  # Return true is all fragments have been received, else return false
+  res = $sendmsgBuffer[src].length == $sendmsgBuffer[src]["max"] + 1
+  return res
+end
+
+def retMsg(src, maxNum)
+  buffer = src + " --> "
+  for i in 0...maxNum
+    buffer = buffer + $sendmsgBuffer[src][i].tr('_', ' ')
+  end
+  return buffer
+end
+
 # --------------------- Part 1 --------------------- #
 
 =begin
@@ -343,8 +376,31 @@ end
 =end
 def sendmsg(cmd)
 	if $routing_table.has_key?(cmd[0])
-		concat = cmd[1..-1].join("_")
-		$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + $hostname + " " + concat
+	  concat = cmd[1..-1].join("_")
+          if concat.length > $config_map["maxPayload"].to_i
+            # If message is larger than payload, split it into fragments
+            fragments = Array.new
+            start = 0
+            finish = concat.length
+            # Reserve 3 bytes for counter and last fragment info
+            payload = $config_map["maxPayload"].to_i - 3 
+            counter = 0
+            while start < finish
+              if start + payload > finish
+                msg = "SENDMSG " + cmd[0] + " " + $hostname + " " + concat[start..-1] + " " + counter.to_s
+              else
+                msg = "SENDMSG " + cmd[0] + " " + $hostname + " " + concat[start...(start + payload)] + " " + counter.to_s
+              end
+              fragments.push(msg)
+              counter += 1
+              start = start + payload
+            end
+            fragments.each do |msg|
+              $peers[$routing_table[cmd[0]][0]].sock.puts msg + " " + fragments.length.to_s
+            end
+          else
+	    $peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + $hostname + " " + concat
+          end
 	else
 		puts "SENDMSG ERROR: HOST UNREACHABLE"
 	end
@@ -618,11 +674,23 @@ def task_thread()
 					if cmd[0] == "fail" && cmd[1] == $hostname
 						puts "SENDMSG ERROR: HOST UNREACHABLE"
 					elsif cmd[0] == $hostname #INTENDED BEHAVIOR
-						puts cmd[1] + " --> " + cmd[2].tr('_',' ')
+                                          if isFragment? cmd
+                                            add = addToBuffer(cmd)
+                                            if add
+                                              puts retMsg(cmd[1], cmd[4].to_i)
+                                            end
+                                            log($logfile, "sendmsg", "fragmented message received")
+                                          else
+					    puts cmd[1] + " --> " + cmd[2].tr('_',' ')
+                                          end
 					elsif not $routing_table.has_key?(cmd[0])
 						$peers[$routing_table[cmd[1]][0]].sock.puts "SENDMSG fail " + cmd[1] + " *"
 					else
-						$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2]				
+                                          if isFragment? cmd
+                                            $peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2] + " " + cmd[3] + " " + cmd[4]
+                                          else
+					    $peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2]
+	                                  end
 					end
 
 				#cmd: dst, sender, seq num, returning flag
