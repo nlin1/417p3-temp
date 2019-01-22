@@ -1,0 +1,6 @@
+EDGEB Received, in task thread
+Sockfd: #<TCPSocket:0x85c4e48> connected to peer n1
+127.0.0.1
+127.0.0.1
+n3
+Sockfd: #<TCPSocket:0x85d917c> connected to peer n3
