@@ -17,7 +17,10 @@ $current_linkstate = 0
 $pings = {}
 $traceroutes = {}
 $logfile = nil
+<<<<<<< HEAD
+=======
 
+>>>>>>> adab624333318632852c9680db26f5f050428809
 
 $commands = {
     "DUMPTABLE" => :dumptable,
@@ -91,9 +94,13 @@ def linkstate(msg)
    	$peers.each do |node, peer|
 
    		if(temp[2] != peer.hostname) #send to peers besides sender
+<<<<<<< HEAD
+   			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
+=======
 
    			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
 
+>>>>>>> adab624333318632852c9680db26f5f050428809
    			peer.sock.puts(packet)
             peer.sock.flush
    		end
@@ -238,7 +245,6 @@ def edgeb(cmd)
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
 	#puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
-
 	return 0
 end
 
@@ -460,7 +466,11 @@ def setup(hostname, port, nodes, config)
 	$config_map = {}
 	$clock_semaphore = Mutex.new
 	$clock = Time.now
+<<<<<<< HEAD
+        $logfile = "log" + $hostname + ".txt"
+=======
   $logfile = "log" + $hostname + ".txt"
+>>>>>>> adab624333318632852c9680db26f5f050428809
 
 	#set up ports, server, buffers
 
@@ -508,7 +518,11 @@ def node_listener(port)
 	              
 				line = client.gets
 				temp = line.split(" ")
+<<<<<<< HEAD
+
+=======
 				#puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
+>>>>>>> adab624333318632852c9680db26f5f050428809
 				log($logfile, "node_listener", "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line)
 				i += 1
 
@@ -679,8 +693,14 @@ def task_thread()
 					elsif cmd[0] != $hostname && cmd[2] == "true"
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
 					end
+<<<<<<< HEAD
+
+                elsif (task != nil)
+                    send($commands[task[0]], cmd)
+=======
                 else
                     #send($commands[task[0]], cmd)
+>>>>>>> adab624333318632852c9680db26f5f050428809
                 end
 
                 task.clear
