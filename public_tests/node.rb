@@ -233,11 +233,10 @@ def edgeb(cmd)
 	else
 		$routing_table[cmd[2]] = [cmd[2], 1]
 	end
-  puts cmd
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	sock.sync = true
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
-	puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
+	#puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
 
 	return 0
@@ -362,11 +361,11 @@ def ping(cmd)
 	end
 	$pings.clear
 	ping_no = 0
-	puts "ping " + cmd[1] + "."
+	#puts "ping " + cmd[1] + "."
 	thr = Thread.new{
 		while ping_no < cmd[1].to_i
 			#cmd: dst, sender, seq id, returning flag, ping num
-			puts "Attempting to write PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
+			#puts "Attempting to write PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
 			$peers[$routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
 			$pings[ping_no] = [Time.now, false]
 			ping_no += 1
@@ -390,9 +389,27 @@ end
  Description: This method will perform traceroute from the SRC to the DST.
 =end
 def traceroute(cmd)
-	#cmd: dst, hop, returning flag, time sent, sender
-	$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " 1 false " + $clock.to_i + " " + $hostname
+	$tr = []
+	$tr.push(0)
+	$max_hop = 0
+	if not $routing_table.has_key?(cmd[0])
+		puts "TIMEOUT ON 0"
+		return
+	end
+	$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " 1 false " + Time.now.to_f.to_s + " " + $hostname
 	puts "0 " + $hostname + " 0"
+
+	thr = Thread.new{
+		sleep($config_map["pingTimeout"].to_i)
+		for i in 0..($max_hop)
+			if not $tr.include?(i)
+				puts "TIMEOUT ON " + i.to_s
+			end
+		end
+	}
+	thr.join
+	#cmd: dst, hop, returning flag, time sent, sender
+	$tr.clear
 end
 
 # --------------------- Part 4 --------------------- #
@@ -605,11 +622,11 @@ def task_thread()
             # the tasks that are enqueued
             if queue_flag
                 if task[0] == :edgeb
-                	puts "EDGEB Received, in task thread"
+                	#puts "EDGEB Received, in task thread"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
 					t_sock.sync = true
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
-					puts "Sockfd: " + t_sock.to_s + " connected to peer " + cmd[1].to_s
+					#puts "Sockfd: " + t_sock.to_s + " connected to peer " + cmd[1].to_s
 					$routing_table[cmd[1]] = [cmd[1], 1]
 					STDOUT.flush
 
@@ -644,15 +661,23 @@ def task_thread()
 
 				#cmd: dst, hop, returning flag, time sent, sender
 				elsif task[0] == :traceroute
-					if cmd[0] != $hostname && cmd[2] == "false"
+					if cmd[0] == $hostname && cmd[3] == "fail"
+						puts "TIMEOUT on " + cmd[3]
+					elsif cmd[0] == $hostname && cmd[2] == "false"
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + (Time.now.to_f - cmd[3].to_f).to_s + " " + $hostname
+					elsif cmd[0] == $hostname && cmd[2] == "true"
+						$tr.push(cmd[1].to_i)
+						if cmd[1].to_i > $max_hop
+							$max_hop = cmd[1].to_i
+						end
+						puts cmd[1] + " " + cmd[4] + " " + cmd[3]
+					elsif not $routing_table.has_key?(cmd[0])
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + (cmd[1].to_i + 1).to_s + " true fail *"  
+					elsif cmd[0] != $hostname && cmd[2] == "false"
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + (cmd[1].to_i + 1).to_s + " " + cmd[2] + " " + cmd[3] + " " + cmd[4]
-						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + (Time.now.to_f - cmd[3].to_f).to_s + " " + $hostname
 					elsif cmd[0] != $hostname && cmd[2] == "true"
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
-					elsif cmd[0] == $hostname && cmd[2] == "false"
-						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
-					elsif cmd[0] == $hostname && cmd[2] == "true"
-						puts cmd[1] + " " + cmd[4] + " " + cmd[3]
 					end
                 else
                     #send($commands[task[0]], cmd)
