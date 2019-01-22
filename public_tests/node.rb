@@ -18,7 +18,6 @@ $pings = {}
 $traceroutes = {}
 $logfile = nil
 
-
 $commands = {
     "DUMPTABLE" => :dumptable,
     "SHUTDOWN" => :shutdown,
@@ -91,9 +90,7 @@ def linkstate(msg)
    	$peers.each do |node, peer|
 
    		if(temp[2] != peer.hostname) #send to peers besides sender
-
    			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
-
    			peer.sock.puts(packet)
             peer.sock.flush
    		end
@@ -238,7 +235,6 @@ def edgeb(cmd)
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
 	#puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
-
 	return 0
 end
 
@@ -460,7 +456,7 @@ def setup(hostname, port, nodes, config)
 	$config_map = {}
 	$clock_semaphore = Mutex.new
 	$clock = Time.now
-  $logfile = "log" + $hostname + ".txt"
+  	$logfile = "log" + $hostname + ".txt"
 
 	#set up ports, server, buffers
 
@@ -508,7 +504,9 @@ def node_listener(port)
 	              
 				line = client.gets
 				temp = line.split(" ")
+
 				#puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
+
 				log($logfile, "node_listener", "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line)
 				i += 1
 
@@ -679,8 +677,8 @@ def task_thread()
 					elsif cmd[0] != $hostname && cmd[2] == "true"
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
 					end
-                else
-                    #send($commands[task[0]], cmd)
+                elsif (task != nil)
+                    send($commands[task[0]], cmd)
                 end
 
                 task.clear
