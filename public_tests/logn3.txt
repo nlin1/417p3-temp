@@ -5336,3 +5336,1330 @@ dijkstra 2019-01-21 11:39:09 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
 node_listener 2019-01-21 11:39:09 -0800: n3 recieved packet, count = 20 // LINKSTATE 28 n2 20 n1 1 n3 1 
 
 linkstate 2019-01-21 11:39:11 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x83cdab8> packet LINKSTATE 29 n3 20 n2 1 
+dijkstra 2019-01-21 22:47:55 -0800: {}
+dijkstra 2019-01-21 22:47:59 -0800: {}
+dijkstra 2019-01-21 22:48:03 -0800: {}
+dijkstra 2019-01-21 22:48:07 -0800: {}
+dijkstra 2019-01-21 22:48:11 -0800: {}
+dijkstra 2019-01-21 22:48:15 -0800: {}
+dijkstra 2019-01-21 22:48:19 -0800: {}
+dijkstra 2019-01-21 22:48:23 -0800: {}
+dijkstra 2019-01-21 22:48:27 -0800: {}
+dijkstra 2019-01-21 22:48:31 -0800: {}
+dijkstra 2019-01-21 22:48:35 -0800: {}
+dijkstra 2019-01-21 22:48:39 -0800: {}
+dijkstra 2019-01-21 22:48:43 -0800: {}
+dijkstra 2019-01-21 22:48:47 -0800: {}
+dijkstra 2019-01-21 22:48:51 -0800: {}
+node_listener 2019-01-21 22:48:55 -0800: n3 recieved packet, count = 0 // LINKSTATE 38 n1 20 n2 1 
+
+linkstate 2019-01-21 22:48:55 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 38 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:48:55 -0800: {"n2"=>["n2", 1]}
+linkstate 2019-01-21 22:48:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 39 n3 20 n2 1 
+node_listener 2019-01-21 22:48:58 -0800: n3 recieved packet, count = 1 // LINKSTATE 40 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 22:48:58 -0800: n3 recieved packet, count = 2 // LINKSTATE 41 n1 20 n2 1 
+
+linkstate 2019-01-21 22:48:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 41 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:48:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 22:49:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 42 n3 20 n2 1 
+node_listener 2019-01-21 22:49:02 -0800: n3 recieved packet, count = 3 // LINKSTATE 43 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 22:49:02 -0800: n3 recieved packet, count = 4 // LINKSTATE 44 n1 20 n2 1 
+
+linkstate 2019-01-21 22:49:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 44 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:49:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 22:49:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 45 n3 20 n2 1 
+node_listener 2019-01-21 22:49:06 -0800: n3 recieved packet, count = 5 // PING n3 n2 0 true 
+
+node_listener 2019-01-21 22:49:06 -0800: n3 recieved packet, count = 6 // LINKSTATE 46 n1 20 n2 1 
+
+linkstate 2019-01-21 22:49:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 46 n1 20 n2 1 
+
+node_listener 2019-01-21 22:49:06 -0800: n3 recieved packet, count = 7 // LINKSTATE 46 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:49:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:49:07 -0800: n3 recieved packet, count = 8 // PING n3 n2 1 true 
+
+node_listener 2019-01-21 22:49:08 -0800: n3 recieved packet, count = 9 // PING n3 n2 2 true 
+
+linkstate 2019-01-21 22:49:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 47 n3 20 n2 1 
+node_listener 2019-01-21 22:49:10 -0800: n3 recieved packet, count = 10 // LINKSTATE 48 n1 20 n2 1 
+
+linkstate 2019-01-21 22:49:10 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 48 n1 20 n2 1 
+
+node_listener 2019-01-21 22:49:10 -0800: n3 recieved packet, count = 11 // LINKSTATE 49 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:49:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:49:11 -0800: n3 recieved packet, count = 12 // PING n3 n1 0 false
+
+node_listener 2019-01-21 22:49:12 -0800: n3 recieved packet, count = 13 // PING n3 n1 1 false
+
+linkstate 2019-01-21 22:49:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 50 n3 20 n2 1 
+node_listener 2019-01-21 22:49:13 -0800: n3 recieved packet, count = 14 // PING n3 n1 2 false
+
+node_listener 2019-01-21 22:49:14 -0800: n3 recieved packet, count = 15 // LINKSTATE 51 n1 20 n2 1 
+
+linkstate 2019-01-21 22:49:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 51 n1 20 n2 1 
+
+node_listener 2019-01-21 22:49:14 -0800: n3 recieved packet, count = 16 // LINKSTATE 51 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:49:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 22:49:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 52 n3 20 n2 1 
+node_listener 2019-01-21 22:49:18 -0800: n3 recieved packet, count = 17 // LINKSTATE 53 n1 20 n2 1 
+
+linkstate 2019-01-21 22:49:18 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 53 n1 20 n2 1 
+
+node_listener 2019-01-21 22:49:18 -0800: n3 recieved packet, count = 18 // LINKSTATE 54 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:49:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 22:49:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x9e199f8> packet LINKSTATE 55 n3 20 n2 1 
+node_listener 2019-01-21 22:49:21 -0800: n3 recieved packet, count = 19 // TRACEROUTE n3 2 false 1548139769.9529052 n1
+
+dijkstra 2019-01-21 22:50:51 -0800: {}
+dijkstra 2019-01-21 22:50:55 -0800: {}
+dijkstra 2019-01-21 22:50:59 -0800: {}
+dijkstra 2019-01-21 22:51:03 -0800: {"n2"=>["n2", 1]}
+node_listener 2019-01-21 22:51:04 -0800: n3 recieved packet, count = 0 // LINKSTATE 11 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 12 n3 20 n2 1 
+node_listener 2019-01-21 22:51:06 -0800: n3 recieved packet, count = 1 // LINKSTATE 13 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 13 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:07 -0800: n3 recieved packet, count = 2 // LINKSTATE 14 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 15 n3 20 n2 1 
+node_listener 2019-01-21 22:51:09 -0800: n3 recieved packet, count = 3 // TRACEROUTE n3 2 false 1548139872.1797326 n1
+
+node_listener 2019-01-21 22:51:10 -0800: n3 recieved packet, count = 4 // LINKSTATE 16 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:10 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 16 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:12 -0800: n3 recieved packet, count = 5 // LINKSTATE 17 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 18 n3 20 n2 1 
+node_listener 2019-01-21 22:51:14 -0800: n3 recieved packet, count = 6 // LINKSTATE 19 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 19 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:16 -0800: n3 recieved packet, count = 7 // LINKSTATE 20 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 21 n3 20 n2 1 
+node_listener 2019-01-21 22:51:18 -0800: n3 recieved packet, count = 8 // LINKSTATE 22 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:18 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 22 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:20 -0800: n3 recieved packet, count = 9 // LINKSTATE 23 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 24 n3 20 n2 1 
+node_listener 2019-01-21 22:51:22 -0800: n3 recieved packet, count = 10 // LINKSTATE 25 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:22 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 25 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:24 -0800: n3 recieved packet, count = 11 // LINKSTATE 26 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 27 n3 20 n2 1 
+node_listener 2019-01-21 22:51:26 -0800: n3 recieved packet, count = 12 // LINKSTATE 28 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:26 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 28 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:27 -0800: n3 recieved packet, count = 13 // LINKSTATE 29 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 30 n3 20 n2 1 
+node_listener 2019-01-21 22:51:30 -0800: n3 recieved packet, count = 14 // LINKSTATE 31 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:30 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 31 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:32 -0800: n3 recieved packet, count = 15 // LINKSTATE 32 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 33 n3 20 n2 1 
+dijkstra 2019-01-21 22:51:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:35 -0800: n3 recieved packet, count = 16 // LINKSTATE 34 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:35 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 34 n1 20 n2 1 
+
+node_listener 2019-01-21 22:51:36 -0800: n3 recieved packet, count = 17 // LINKSTATE 35 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 36 n3 20 n2 1 
+node_listener 2019-01-21 22:51:38 -0800: n3 recieved packet, count = 18 // LINKSTATE 37 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:38 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 37 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:40 -0800: n3 recieved packet, count = 19 // LINKSTATE 38 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 39 n3 20 n2 1 
+node_listener 2019-01-21 22:51:42 -0800: n3 recieved packet, count = 20 // LINKSTATE 40 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:42 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 40 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:44 -0800: n3 recieved packet, count = 21 // LINKSTATE 41 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 42 n3 20 n2 1 
+node_listener 2019-01-21 22:51:46 -0800: n3 recieved packet, count = 22 // LINKSTATE 43 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 22:51:47 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 43 n1 20 n2 1 
+
+node_listener 2019-01-21 22:51:47 -0800: n3 recieved packet, count = 23 // LINKSTATE 44 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 45 n3 20 n2 1 
+node_listener 2019-01-21 22:51:50 -0800: n3 recieved packet, count = 24 // LINKSTATE 46 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:50 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 46 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:52 -0800: n3 recieved packet, count = 25 // LINKSTATE 47 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 48 n3 20 n2 1 
+node_listener 2019-01-21 22:51:54 -0800: n3 recieved packet, count = 26 // LINKSTATE 49 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:54 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 49 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:55 -0800: n3 recieved packet, count = 27 // LINKSTATE 50 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:51:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 51 n3 20 n2 1 
+node_listener 2019-01-21 22:51:58 -0800: n3 recieved packet, count = 28 // LINKSTATE 52 n1 20 n2 1 
+
+linkstate 2019-01-21 22:51:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 52 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:51:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:51:59 -0800: n3 recieved packet, count = 29 // LINKSTATE 53 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 54 n3 20 n2 1 
+node_listener 2019-01-21 22:52:02 -0800: n3 recieved packet, count = 30 // LINKSTATE 55 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 55 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:03 -0800: n3 recieved packet, count = 31 // LINKSTATE 56 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 57 n3 20 n2 1 
+node_listener 2019-01-21 22:52:06 -0800: n3 recieved packet, count = 32 // LINKSTATE 58 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 58 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:07 -0800: n3 recieved packet, count = 33 // LINKSTATE 59 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 60 n3 20 n2 1 
+node_listener 2019-01-21 22:52:10 -0800: n3 recieved packet, count = 34 // LINKSTATE 61 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:10 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 61 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:11 -0800: n3 recieved packet, count = 35 // LINKSTATE 62 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 63 n3 20 n2 1 
+node_listener 2019-01-21 22:52:14 -0800: n3 recieved packet, count = 36 // LINKSTATE 64 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 64 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:15 -0800: n3 recieved packet, count = 37 // LINKSTATE 65 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 66 n3 20 n2 1 
+node_listener 2019-01-21 22:52:18 -0800: n3 recieved packet, count = 38 // LINKSTATE 67 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:18 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 67 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:19 -0800: n3 recieved packet, count = 39 // LINKSTATE 68 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 69 n3 20 n2 1 
+node_listener 2019-01-21 22:52:22 -0800: n3 recieved packet, count = 40 // LINKSTATE 70 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:22 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 70 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:23 -0800: n3 recieved packet, count = 41 // LINKSTATE 71 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 72 n3 20 n2 1 
+node_listener 2019-01-21 22:52:26 -0800: n3 recieved packet, count = 42 // LINKSTATE 73 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:26 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 73 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:27 -0800: n3 recieved packet, count = 43 // LINKSTATE 74 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 75 n3 20 n2 1 
+node_listener 2019-01-21 22:52:30 -0800: n3 recieved packet, count = 44 // LINKSTATE 76 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:30 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 76 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:31 -0800: n3 recieved packet, count = 45 // LINKSTATE 77 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 78 n3 20 n2 1 
+node_listener 2019-01-21 22:52:34 -0800: n3 recieved packet, count = 46 // LINKSTATE 79 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:34 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 79 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:35 -0800: n3 recieved packet, count = 47 // LINKSTATE 80 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 81 n3 20 n2 1 
+node_listener 2019-01-21 22:52:38 -0800: n3 recieved packet, count = 48 // LINKSTATE 82 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:38 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 82 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:39 -0800: n3 recieved packet, count = 49 // LINKSTATE 83 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 84 n3 20 n2 1 
+node_listener 2019-01-21 22:52:42 -0800: n3 recieved packet, count = 50 // LINKSTATE 85 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:42 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 85 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:43 -0800: n3 recieved packet, count = 51 // LINKSTATE 86 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 87 n3 20 n2 1 
+node_listener 2019-01-21 22:52:45 -0800: n3 recieved packet, count = 52 // LINKSTATE 88 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:46 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 88 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:47 -0800: n3 recieved packet, count = 53 // LINKSTATE 89 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 90 n3 20 n2 1 
+node_listener 2019-01-21 22:52:50 -0800: n3 recieved packet, count = 54 // LINKSTATE 91 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:50 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 91 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:51 -0800: n3 recieved packet, count = 55 // LINKSTATE 92 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 93 n3 20 n2 1 
+node_listener 2019-01-21 22:52:54 -0800: n3 recieved packet, count = 56 // LINKSTATE 94 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:54 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 94 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:55 -0800: n3 recieved packet, count = 57 // LINKSTATE 95 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:52:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 96 n3 20 n2 1 
+node_listener 2019-01-21 22:52:58 -0800: n3 recieved packet, count = 58 // LINKSTATE 97 n1 20 n2 1 
+
+linkstate 2019-01-21 22:52:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 97 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:52:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:52:59 -0800: n3 recieved packet, count = 59 // LINKSTATE 98 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 99 n3 20 n2 1 
+node_listener 2019-01-21 22:53:02 -0800: n3 recieved packet, count = 60 // LINKSTATE 100 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 100 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:03 -0800: n3 recieved packet, count = 61 // LINKSTATE 101 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 102 n3 20 n2 1 
+node_listener 2019-01-21 22:53:06 -0800: n3 recieved packet, count = 62 // LINKSTATE 103 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 103 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:07 -0800: n3 recieved packet, count = 63 // LINKSTATE 104 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 105 n3 20 n2 1 
+node_listener 2019-01-21 22:53:10 -0800: n3 recieved packet, count = 64 // LINKSTATE 106 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:10 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 106 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:11 -0800: n3 recieved packet, count = 65 // LINKSTATE 107 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 108 n3 20 n2 1 
+node_listener 2019-01-21 22:53:14 -0800: n3 recieved packet, count = 66 // LINKSTATE 109 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 109 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:15 -0800: n3 recieved packet, count = 67 // LINKSTATE 110 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 111 n3 20 n2 1 
+node_listener 2019-01-21 22:53:18 -0800: n3 recieved packet, count = 68 // LINKSTATE 112 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:18 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 112 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:19 -0800: n3 recieved packet, count = 69 // LINKSTATE 113 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 114 n3 20 n2 1 
+node_listener 2019-01-21 22:53:22 -0800: n3 recieved packet, count = 70 // LINKSTATE 115 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:22 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 115 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:23 -0800: n3 recieved packet, count = 71 // LINKSTATE 116 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 117 n3 20 n2 1 
+node_listener 2019-01-21 22:53:26 -0800: n3 recieved packet, count = 72 // LINKSTATE 118 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:26 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 118 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:27 -0800: n3 recieved packet, count = 73 // LINKSTATE 119 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 120 n3 20 n2 1 
+node_listener 2019-01-21 22:53:30 -0800: n3 recieved packet, count = 74 // LINKSTATE 121 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:30 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 121 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:31 -0800: n3 recieved packet, count = 75 // LINKSTATE 122 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 123 n3 20 n2 1 
+node_listener 2019-01-21 22:53:34 -0800: n3 recieved packet, count = 76 // LINKSTATE 124 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:34 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 124 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:35 -0800: n3 recieved packet, count = 77 // LINKSTATE 125 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 126 n3 20 n2 1 
+node_listener 2019-01-21 22:53:38 -0800: n3 recieved packet, count = 78 // LINKSTATE 127 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:38 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 127 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:39 -0800: n3 recieved packet, count = 79 // LINKSTATE 128 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 22:53:40 -0800: n3 recieved packet, count = 80 // PING n3 n1 0 false
+
+linkstate 2019-01-21 22:53:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 129 n3 20 n2 1 
+node_listener 2019-01-21 22:53:41 -0800: n3 recieved packet, count = 81 // PING n3 n1 1 false
+
+node_listener 2019-01-21 22:53:42 -0800: n3 recieved packet, count = 82 // LINKSTATE 130 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:42 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 130 n1 20 n2 1 
+
+node_listener 2019-01-21 22:53:42 -0800: n3 recieved packet, count = 83 // PING n3 n1 2 false
+
+dijkstra 2019-01-21 22:53:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:43 -0800: n3 recieved packet, count = 84 // LINKSTATE 131 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 132 n3 20 n2 1 
+node_listener 2019-01-21 22:53:46 -0800: n3 recieved packet, count = 85 // LINKSTATE 133 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:46 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 133 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:48 -0800: n3 recieved packet, count = 86 // LINKSTATE 134 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 135 n3 20 n2 1 
+node_listener 2019-01-21 22:53:50 -0800: n3 recieved packet, count = 87 // LINKSTATE 136 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:50 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 136 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:51 -0800: n3 recieved packet, count = 88 // LINKSTATE 137 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 138 n3 20 n2 1 
+node_listener 2019-01-21 22:53:54 -0800: n3 recieved packet, count = 89 // LINKSTATE 139 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:54 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 139 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:55 -0800: n3 recieved packet, count = 90 // LINKSTATE 140 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:53:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 141 n3 20 n2 1 
+node_listener 2019-01-21 22:53:58 -0800: n3 recieved packet, count = 91 // LINKSTATE 142 n1 20 n2 1 
+
+linkstate 2019-01-21 22:53:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 142 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:53:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:53:59 -0800: n3 recieved packet, count = 92 // LINKSTATE 143 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 22:54:00 -0800: n3 recieved packet, count = 93 // SENDMSG n3 n1 "ur_gay"
+
+linkstate 2019-01-21 22:54:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 144 n3 20 n2 1 
+node_listener 2019-01-21 22:54:02 -0800: n3 recieved packet, count = 94 // LINKSTATE 145 n1 20 n2 1 
+
+linkstate 2019-01-21 22:54:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 145 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:54:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:54:03 -0800: n3 recieved packet, count = 95 // LINKSTATE 146 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:54:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 147 n3 20 n2 1 
+node_listener 2019-01-21 22:54:06 -0800: n3 recieved packet, count = 96 // LINKSTATE 148 n1 20 n2 1 
+
+linkstate 2019-01-21 22:54:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x8273f14> packet LINKSTATE 148 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:54:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:54:07 -0800: n3 recieved packet, count = 97 // LINKSTATE 149 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:56:14 -0800: {}
+dijkstra 2019-01-21 22:56:18 -0800: {"n2"=>["n2", 1]}
+node_listener 2019-01-21 22:56:18 -0800: n3 recieved packet, count = 0 // LINKSTATE 4 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 22:56:19 -0800: n3 recieved packet, count = 1 // LINKSTATE 5 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:19 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 5 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:20 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 6 n3 20 n2 1 
+node_listener 2019-01-21 22:56:21 -0800: n3 recieved packet, count = 2 // LINKSTATE 7 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:56:22 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:56:23 -0800: n3 recieved packet, count = 3 // LINKSTATE 8 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:23 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 8 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:24 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 9 n3 20 n2 1 
+node_listener 2019-01-21 22:56:25 -0800: n3 recieved packet, count = 4 // LINKSTATE 10 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:56:26 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:56:27 -0800: n3 recieved packet, count = 5 // LINKSTATE 11 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:27 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 11 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:28 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 12 n3 20 n2 1 
+node_listener 2019-01-21 22:56:30 -0800: n3 recieved packet, count = 6 // LINKSTATE 13 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:56:30 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:56:31 -0800: n3 recieved packet, count = 7 // LINKSTATE 14 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:31 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 14 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:32 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 15 n3 20 n2 1 
+dijkstra 2019-01-21 22:56:34 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:56:34 -0800: n3 recieved packet, count = 8 // LINKSTATE 16 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 22:56:36 -0800: n3 recieved packet, count = 9 // LINKSTATE 17 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:36 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 17 n3 20 n2 1 
+linkstate 2019-01-21 22:56:36 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 17 n1 20 n2 1 
+
+node_listener 2019-01-21 22:56:38 -0800: n3 recieved packet, count = 10 // LINKSTATE 18 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:56:38 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:56:39 -0800: n3 recieved packet, count = 11 // LINKSTATE 19 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:39 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 19 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:40 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 20 n3 20 n2 1 
+node_listener 2019-01-21 22:56:42 -0800: n3 recieved packet, count = 12 // LINKSTATE 21 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:56:42 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:56:43 -0800: n3 recieved packet, count = 13 // LINKSTATE 22 n1 20 n2 1 
+
+linkstate 2019-01-21 22:56:44 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 22 n3 20 n2 1 
+linkstate 2019-01-21 22:56:44 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92e373c> packet LINKSTATE 22 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:03 -0800: {"n2"=>["n2", 1]}
+linkstate 2019-01-21 22:57:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 2 n3 20 n2 1 
+node_listener 2019-01-21 22:57:06 -0800: n3 recieved packet, count = 0 // LINKSTATE 3 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 3 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:07 -0800: {"n2"=>["n2", 1]}
+node_listener 2019-01-21 22:57:07 -0800: n3 recieved packet, count = 1 // LINKSTATE 4 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 5 n3 20 n2 1 
+node_listener 2019-01-21 22:57:09 -0800: n3 recieved packet, count = 2 // LINKSTATE 6 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 6 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:11 -0800: n3 recieved packet, count = 3 // LINKSTATE 7 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 8 n3 20 n2 1 
+node_listener 2019-01-21 22:57:14 -0800: n3 recieved packet, count = 4 // LINKSTATE 9 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 9 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:15 -0800: n3 recieved packet, count = 5 // LINKSTATE 10 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 11 n3 20 n2 1 
+node_listener 2019-01-21 22:57:17 -0800: n3 recieved packet, count = 6 // LINKSTATE 12 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 12 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:19 -0800: n3 recieved packet, count = 7 // LINKSTATE 13 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 14 n3 20 n2 1 
+node_listener 2019-01-21 22:57:21 -0800: n3 recieved packet, count = 8 // LINKSTATE 15 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 15 n1 20 n2 1 
+
+node_listener 2019-01-21 22:57:22 -0800: n3 recieved packet, count = 9 // LINKSTATE 16 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 22:57:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 22:57:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 17 n3 20 n2 1 
+node_listener 2019-01-21 22:57:25 -0800: n3 recieved packet, count = 10 // LINKSTATE 18 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 18 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:27 -0800: n3 recieved packet, count = 11 // LINKSTATE 19 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 20 n3 20 n2 1 
+node_listener 2019-01-21 22:57:29 -0800: n3 recieved packet, count = 12 // LINKSTATE 20 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 20 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:31 -0800: n3 recieved packet, count = 13 // LINKSTATE 21 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 22 n3 20 n2 1 
+node_listener 2019-01-21 22:57:33 -0800: n3 recieved packet, count = 14 // LINKSTATE 23 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 23 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:35 -0800: n3 recieved packet, count = 15 // LINKSTATE 24 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 25 n3 20 n2 1 
+node_listener 2019-01-21 22:57:37 -0800: n3 recieved packet, count = 16 // LINKSTATE 26 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 26 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:39 -0800: n3 recieved packet, count = 17 // LINKSTATE 27 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 28 n3 20 n2 1 
+node_listener 2019-01-21 22:57:41 -0800: n3 recieved packet, count = 18 // LINKSTATE 29 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 29 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:43 -0800: n3 recieved packet, count = 19 // LINKSTATE 30 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 31 n3 20 n2 1 
+node_listener 2019-01-21 22:57:46 -0800: n3 recieved packet, count = 20 // LINKSTATE 32 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:46 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 32 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:47 -0800: n3 recieved packet, count = 21 // LINKSTATE 33 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 34 n3 20 n2 1 
+node_listener 2019-01-21 22:57:49 -0800: n3 recieved packet, count = 22 // LINKSTATE 35 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:50 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 35 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:51 -0800: n3 recieved packet, count = 23 // LINKSTATE 36 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 37 n3 20 n2 1 
+node_listener 2019-01-21 22:57:53 -0800: n3 recieved packet, count = 24 // LINKSTATE 38 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 38 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:56 -0800: n3 recieved packet, count = 25 // LINKSTATE 39 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:57:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 40 n3 20 n2 1 
+node_listener 2019-01-21 22:57:58 -0800: n3 recieved packet, count = 26 // LINKSTATE 41 n1 20 n2 1 
+
+linkstate 2019-01-21 22:57:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 41 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:57:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:57:59 -0800: n3 recieved packet, count = 27 // LINKSTATE 42 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 43 n3 20 n2 1 
+node_listener 2019-01-21 22:58:02 -0800: n3 recieved packet, count = 28 // LINKSTATE 44 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 44 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:03 -0800: n3 recieved packet, count = 29 // LINKSTATE 45 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 46 n3 20 n2 1 
+node_listener 2019-01-21 22:58:06 -0800: n3 recieved packet, count = 30 // LINKSTATE 47 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 47 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:07 -0800: n3 recieved packet, count = 31 // LINKSTATE 48 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 49 n3 20 n2 1 
+node_listener 2019-01-21 22:58:09 -0800: n3 recieved packet, count = 32 // LINKSTATE 50 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:10 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 50 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:11 -0800: n3 recieved packet, count = 33 // LINKSTATE 51 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 52 n3 20 n2 1 
+node_listener 2019-01-21 22:58:13 -0800: n3 recieved packet, count = 34 // LINKSTATE 53 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 53 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:15 -0800: n3 recieved packet, count = 35 // LINKSTATE 54 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 55 n3 20 n2 1 
+node_listener 2019-01-21 22:58:17 -0800: n3 recieved packet, count = 36 // LINKSTATE 56 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 56 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:19 -0800: n3 recieved packet, count = 37 // LINKSTATE 57 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 58 n3 20 n2 1 
+node_listener 2019-01-21 22:58:22 -0800: n3 recieved packet, count = 38 // LINKSTATE 59 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:22 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 59 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:23 -0800: n3 recieved packet, count = 39 // LINKSTATE 60 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 61 n3 20 n2 1 
+node_listener 2019-01-21 22:58:25 -0800: n3 recieved packet, count = 40 // LINKSTATE 62 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 62 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:27 -0800: n3 recieved packet, count = 41 // LINKSTATE 63 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 64 n3 20 n2 1 
+node_listener 2019-01-21 22:58:29 -0800: n3 recieved packet, count = 42 // LINKSTATE 65 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 65 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:31 -0800: n3 recieved packet, count = 43 // LINKSTATE 66 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 67 n3 20 n2 1 
+node_listener 2019-01-21 22:58:33 -0800: n3 recieved packet, count = 44 // LINKSTATE 68 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 68 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:35 -0800: n3 recieved packet, count = 45 // LINKSTATE 69 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 70 n3 20 n2 1 
+node_listener 2019-01-21 22:58:37 -0800: n3 recieved packet, count = 46 // LINKSTATE 71 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 71 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:39 -0800: n3 recieved packet, count = 47 // LINKSTATE 72 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 73 n3 20 n2 1 
+node_listener 2019-01-21 22:58:41 -0800: n3 recieved packet, count = 48 // LINKSTATE 74 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 74 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:43 -0800: n3 recieved packet, count = 49 // LINKSTATE 75 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 76 n3 20 n2 1 
+node_listener 2019-01-21 22:58:45 -0800: n3 recieved packet, count = 50 // LINKSTATE 76 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 76 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:47 -0800: n3 recieved packet, count = 51 // LINKSTATE 77 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 78 n3 20 n2 1 
+node_listener 2019-01-21 22:58:49 -0800: n3 recieved packet, count = 52 // LINKSTATE 79 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 79 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:51 -0800: n3 recieved packet, count = 53 // LINKSTATE 80 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 81 n3 20 n2 1 
+node_listener 2019-01-21 22:58:54 -0800: n3 recieved packet, count = 54 // LINKSTATE 81 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:54 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 81 n1 20 n2 1 
+
+dijkstra 2019-01-21 22:58:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 22:58:55 -0800: n3 recieved packet, count = 55 // LINKSTATE 82 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 22:58:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 83 n3 20 n2 1 
+node_listener 2019-01-21 22:58:57 -0800: n3 recieved packet, count = 56 // LINKSTATE 83 n1 20 n2 1 
+
+linkstate 2019-01-21 22:58:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x945118c> packet LINKSTATE 83 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:00:40 -0800: {}
+linkstate 2019-01-21 23:00:42 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 2 n3 20 n2 1 
+node_listener 2019-01-21 23:00:42 -0800: n3 recieved packet, count = 0 // LINKSTATE 3 n1 20 n2 1 
+
+linkstate 2019-01-21 23:00:42 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 3 n1 20 n2 1 
+
+node_listener 2019-01-21 23:00:44 -0800: n3 recieved packet, count = 1 // LINKSTATE 3 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 23:00:44 -0800: {"n2"=>["n2", 1]}
+linkstate 2019-01-21 23:00:46 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 4 n3 20 n2 1 
+node_listener 2019-01-21 23:00:46 -0800: n3 recieved packet, count = 2 // LINKSTATE 4 n1 20 n2 1 
+
+linkstate 2019-01-21 23:00:46 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 4 n1 20 n2 1 
+
+node_listener 2019-01-21 23:00:47 -0800: n3 recieved packet, count = 3 // LINKSTATE 5 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 23:00:48 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 23:00:50 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 6 n3 20 n2 1 
+node_listener 2019-01-21 23:00:50 -0800: n3 recieved packet, count = 4 // LINKSTATE 6 n1 20 n2 1 
+
+linkstate 2019-01-21 23:00:50 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 6 n1 20 n2 1 
+
+node_listener 2019-01-21 23:00:51 -0800: n3 recieved packet, count = 5 // LINKSTATE 7 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 23:00:52 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 23:00:54 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 8 n3 20 n2 1 
+node_listener 2019-01-21 23:00:54 -0800: n3 recieved packet, count = 6 // LINKSTATE 9 n1 20 n2 1 
+
+linkstate 2019-01-21 23:00:54 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 9 n1 20 n2 1 
+
+node_listener 2019-01-21 23:00:55 -0800: n3 recieved packet, count = 7 // LINKSTATE 10 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 23:00:56 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 23:00:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 11 n3 20 n2 1 
+node_listener 2019-01-21 23:00:58 -0800: n3 recieved packet, count = 8 // LINKSTATE 11 n1 20 n2 1 
+
+linkstate 2019-01-21 23:00:58 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 11 n1 20 n2 1 
+
+node_listener 2019-01-21 23:00:59 -0800: n3 recieved packet, count = 9 // LINKSTATE 12 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 23:01:00 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+linkstate 2019-01-21 23:01:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 13 n3 20 n2 1 
+node_listener 2019-01-21 23:01:02 -0800: n3 recieved packet, count = 10 // LINKSTATE 13 n1 20 n2 1 
+
+linkstate 2019-01-21 23:01:02 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x92bc574> packet LINKSTATE 13 n1 20 n2 1 
+
+node_listener 2019-01-21 23:01:03 -0800: n3 recieved packet, count = 11 // LINKSTATE 14 n2 20 n1 1 n3 1 
+
+dijkstra 2019-01-21 23:01:04 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+dijkstra 2019-01-21 23:02:59 -0800: {}
+dijkstra 2019-01-21 23:03:03 -0800: {"n2"=>["n2", 1]}
+node_listener 2019-01-21 23:03:04 -0800: n3 recieved packet, count = 0 // LINKSTATE 8 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 23:03:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 9 n3 20 n2 1 
+node_listener 2019-01-21 23:03:05 -0800: n3 recieved packet, count = 1 // LINKSTATE 9 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 9 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:03:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:08 -0800: n3 recieved packet, count = 2 // LINKSTATE 10 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 23:03:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 11 n3 20 n2 1 
+node_listener 2019-01-21 23:03:09 -0800: n3 recieved packet, count = 3 // LINKSTATE 11 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 11 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:03:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:11 -0800: n3 recieved packet, count = 4 // PING n3 n1 0 false
+
+node_listener 2019-01-21 23:03:12 -0800: n3 recieved packet, count = 5 // LINKSTATE 12 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 23:03:12 -0800: n3 recieved packet, count = 6 // PING n3 n1 1 false
+
+linkstate 2019-01-21 23:03:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 13 n3 20 n2 1 
+node_listener 2019-01-21 23:03:13 -0800: n3 recieved packet, count = 7 // LINKSTATE 13 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 13 n1 20 n2 1 
+
+node_listener 2019-01-21 23:03:13 -0800: n3 recieved packet, count = 8 // PING n3 n1 2 false
+
+dijkstra 2019-01-21 23:03:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:16 -0800: n3 recieved packet, count = 9 // LINKSTATE 14 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 23:03:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 15 n3 20 n2 1 
+node_listener 2019-01-21 23:03:17 -0800: n3 recieved packet, count = 10 // LINKSTATE 15 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 15 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:03:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:19 -0800: n3 recieved packet, count = 11 // LINKSTATE 16 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 23:03:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 17 n3 20 n2 1 
+node_listener 2019-01-21 23:03:21 -0800: n3 recieved packet, count = 12 // LINKSTATE 17 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 17 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:03:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:23 -0800: n3 recieved packet, count = 13 // LINKSTATE 18 n2 20 n1 1 n3 1 
+
+linkstate 2019-01-21 23:03:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 19 n3 20 n2 1 
+node_listener 2019-01-21 23:03:25 -0800: n3 recieved packet, count = 14 // LINKSTATE 19 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 19 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:03:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:27 -0800: n3 recieved packet, count = 15 // LINKSTATE 20 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 23:03:29 -0800: n3 recieved packet, count = 16 // LINKSTATE 21 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 21 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 22 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:31 -0800: n3 recieved packet, count = 17 // LINKSTATE 23 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 23:03:32 -0800: n3 recieved packet, count = 18 // LINKSTATE 24 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:32 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 24 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 25 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:35 -0800: n3 recieved packet, count = 19 // LINKSTATE 26 n2 20 n1 1 n3 1 
+
+node_listener 2019-01-21 23:03:36 -0800: n3 recieved packet, count = 20 // LINKSTATE 27 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:36 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 27 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 28 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 2]}
+node_listener 2019-01-21 23:03:39 -0800: n3 recieved packet, count = 21 // LINKSTATE 29 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:03:40 -0800: n3 recieved packet, count = 22 // LINKSTATE 30 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:40 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 30 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 31 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:03:43 -0800: n3 recieved packet, count = 23 // LINKSTATE 32 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:03:44 -0800: n3 recieved packet, count = 24 // LINKSTATE 33 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:44 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 33 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 34 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:03:47 -0800: n3 recieved packet, count = 25 // LINKSTATE 35 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:03:48 -0800: n3 recieved packet, count = 26 // LINKSTATE 36 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:48 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 36 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 37 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:03:51 -0800: n3 recieved packet, count = 27 // LINKSTATE 38 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:03:52 -0800: n3 recieved packet, count = 28 // LINKSTATE 39 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:52 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 39 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 40 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:03:55 -0800: n3 recieved packet, count = 29 // LINKSTATE 41 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:03:56 -0800: n3 recieved packet, count = 30 // LINKSTATE 42 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:56 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 42 n1 20 n2 1 
+
+linkstate 2019-01-21 23:03:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 43 n3 20 n2 1 
+dijkstra 2019-01-21 23:03:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:03:59 -0800: n3 recieved packet, count = 31 // LINKSTATE 44 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:00 -0800: n3 recieved packet, count = 32 // LINKSTATE 45 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:00 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 45 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 46 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:03 -0800: n3 recieved packet, count = 33 // LINKSTATE 47 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:04 -0800: n3 recieved packet, count = 34 // LINKSTATE 48 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:04 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 48 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 49 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:07 -0800: n3 recieved packet, count = 35 // LINKSTATE 50 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:08 -0800: n3 recieved packet, count = 36 // LINKSTATE 51 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:08 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 51 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 52 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:11 -0800: n3 recieved packet, count = 37 // LINKSTATE 53 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:12 -0800: n3 recieved packet, count = 38 // LINKSTATE 54 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:12 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 54 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 55 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:15 -0800: n3 recieved packet, count = 39 // LINKSTATE 56 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:16 -0800: n3 recieved packet, count = 40 // LINKSTATE 57 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:16 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 57 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 58 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:19 -0800: n3 recieved packet, count = 41 // LINKSTATE 59 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:20 -0800: n3 recieved packet, count = 42 // LINKSTATE 60 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:20 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 60 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 61 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:23 -0800: n3 recieved packet, count = 43 // LINKSTATE 62 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:24 -0800: n3 recieved packet, count = 44 // LINKSTATE 63 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:24 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 63 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 64 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:27 -0800: n3 recieved packet, count = 45 // LINKSTATE 65 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:28 -0800: n3 recieved packet, count = 46 // LINKSTATE 66 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:28 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 66 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 67 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:31 -0800: n3 recieved packet, count = 47 // LINKSTATE 68 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:32 -0800: n3 recieved packet, count = 48 // LINKSTATE 69 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:32 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 69 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 70 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:35 -0800: n3 recieved packet, count = 49 // LINKSTATE 71 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:36 -0800: n3 recieved packet, count = 50 // LINKSTATE 72 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:36 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 72 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 73 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:39 -0800: n3 recieved packet, count = 51 // LINKSTATE 74 n2 20 n1 3 n3 1 
+
+node_listener 2019-01-21 23:04:40 -0800: n3 recieved packet, count = 52 // LINKSTATE 75 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:40 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 75 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 76 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:43 -0800: n3 recieved packet, count = 53 // LINKSTATE 77 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:04:44 -0800: n3 recieved packet, count = 54 // LINKSTATE 78 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:44 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 78 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 79 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:47 -0800: n3 recieved packet, count = 55 // LINKSTATE 80 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:04:48 -0800: n3 recieved packet, count = 56 // LINKSTATE 81 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:48 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 81 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 82 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:51 -0800: n3 recieved packet, count = 57 // LINKSTATE 83 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:04:52 -0800: n3 recieved packet, count = 58 // LINKSTATE 84 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:52 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 84 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 85 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:55 -0800: n3 recieved packet, count = 59 // LINKSTATE 86 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:04:56 -0800: n3 recieved packet, count = 60 // LINKSTATE 87 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:56 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 87 n1 20 n2 1 
+
+linkstate 2019-01-21 23:04:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 88 n3 20 n2 1 
+dijkstra 2019-01-21 23:04:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:04:59 -0800: n3 recieved packet, count = 61 // LINKSTATE 89 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:00 -0800: n3 recieved packet, count = 62 // LINKSTATE 90 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:00 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 90 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 91 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:03 -0800: n3 recieved packet, count = 63 // LINKSTATE 92 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:04 -0800: n3 recieved packet, count = 64 // LINKSTATE 93 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:04 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 93 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 94 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:07 -0800: n3 recieved packet, count = 65 // LINKSTATE 95 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:08 -0800: n3 recieved packet, count = 66 // LINKSTATE 95 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:08 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 95 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 96 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:11 -0800: n3 recieved packet, count = 67 // LINKSTATE 97 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:12 -0800: n3 recieved packet, count = 68 // LINKSTATE 98 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:12 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 98 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 99 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:15 -0800: n3 recieved packet, count = 69 // LINKSTATE 100 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:16 -0800: n3 recieved packet, count = 70 // LINKSTATE 101 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:16 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 101 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 102 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:19 -0800: n3 recieved packet, count = 71 // LINKSTATE 103 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:20 -0800: n3 recieved packet, count = 72 // LINKSTATE 104 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:20 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 104 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 105 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:24 -0800: n3 recieved packet, count = 73 // LINKSTATE 106 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:24 -0800: n3 recieved packet, count = 74 // LINKSTATE 107 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:24 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 107 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 108 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:28 -0800: n3 recieved packet, count = 75 // LINKSTATE 109 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:28 -0800: n3 recieved packet, count = 76 // LINKSTATE 110 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:28 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 110 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 111 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:32 -0800: n3 recieved packet, count = 77 // LINKSTATE 112 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:32 -0800: n3 recieved packet, count = 78 // LINKSTATE 113 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 113 n3 20 n2 1 
+linkstate 2019-01-21 23:05:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 113 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:05:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:36 -0800: n3 recieved packet, count = 79 // LINKSTATE 114 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:36 -0800: n3 recieved packet, count = 80 // LINKSTATE 115 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:36 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 115 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 116 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:40 -0800: n3 recieved packet, count = 81 // LINKSTATE 117 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:40 -0800: n3 recieved packet, count = 82 // LINKSTATE 118 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:40 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 118 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 119 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:44 -0800: n3 recieved packet, count = 83 // LINKSTATE 120 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:44 -0800: n3 recieved packet, count = 84 // LINKSTATE 121 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:44 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 121 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 122 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:48 -0800: n3 recieved packet, count = 85 // LINKSTATE 123 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:48 -0800: n3 recieved packet, count = 86 // LINKSTATE 124 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:48 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 124 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 125 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:52 -0800: n3 recieved packet, count = 87 // LINKSTATE 126 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:52 -0800: n3 recieved packet, count = 88 // LINKSTATE 127 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:52 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 127 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 128 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:05:56 -0800: n3 recieved packet, count = 89 // LINKSTATE 129 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:05:56 -0800: n3 recieved packet, count = 90 // LINKSTATE 130 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:56 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 130 n1 20 n2 1 
+
+linkstate 2019-01-21 23:05:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 131 n3 20 n2 1 
+dijkstra 2019-01-21 23:05:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:00 -0800: n3 recieved packet, count = 91 // LINKSTATE 132 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:00 -0800: n3 recieved packet, count = 92 // LINKSTATE 133 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:00 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 133 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 134 n3 20 n2 1 
+dijkstra 2019-01-21 23:06:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:04 -0800: n3 recieved packet, count = 93 // LINKSTATE 135 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:04 -0800: n3 recieved packet, count = 94 // LINKSTATE 136 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:04 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 136 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 137 n3 20 n2 1 
+dijkstra 2019-01-21 23:06:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:08 -0800: n3 recieved packet, count = 95 // LINKSTATE 138 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:08 -0800: n3 recieved packet, count = 96 // LINKSTATE 139 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:08 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 139 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 140 n3 20 n2 1 
+dijkstra 2019-01-21 23:06:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:12 -0800: n3 recieved packet, count = 97 // LINKSTATE 141 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 142 n3 20 n2 1 
+node_listener 2019-01-21 23:06:13 -0800: n3 recieved packet, count = 98 // LINKSTATE 142 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 142 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:16 -0800: n3 recieved packet, count = 99 // LINKSTATE 143 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 144 n3 20 n2 1 
+node_listener 2019-01-21 23:06:17 -0800: n3 recieved packet, count = 100 // LINKSTATE 144 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 144 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:20 -0800: n3 recieved packet, count = 101 // LINKSTATE 145 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 146 n3 20 n2 1 
+node_listener 2019-01-21 23:06:21 -0800: n3 recieved packet, count = 102 // LINKSTATE 146 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 146 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:24 -0800: n3 recieved packet, count = 103 // LINKSTATE 147 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 148 n3 20 n2 1 
+node_listener 2019-01-21 23:06:25 -0800: n3 recieved packet, count = 104 // LINKSTATE 148 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:25 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 148 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:27 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:28 -0800: n3 recieved packet, count = 105 // LINKSTATE 149 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 150 n3 20 n2 1 
+node_listener 2019-01-21 23:06:29 -0800: n3 recieved packet, count = 106 // LINKSTATE 150 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:29 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 150 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:31 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:32 -0800: n3 recieved packet, count = 107 // LINKSTATE 151 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 151 n3 20 n2 1 
+node_listener 2019-01-21 23:06:33 -0800: n3 recieved packet, count = 108 // LINKSTATE 152 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:33 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 152 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:35 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:06:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 153 n3 20 n2 1 
+node_listener 2019-01-21 23:06:37 -0800: n3 recieved packet, count = 109 // LINKSTATE 153 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:37 -0800: n3 recieved packet, count = 110 // LINKSTATE 153 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:37 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 153 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:39 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:40 -0800: n3 recieved packet, count = 111 // LINKSTATE 154 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:41 -0800: n3 recieved packet, count = 112 // LINKSTATE 155 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 155 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:41 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 156 n3 20 n2 1 
+dijkstra 2019-01-21 23:06:43 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+node_listener 2019-01-21 23:06:44 -0800: n3 recieved packet, count = 113 // LINKSTATE 157 n2 20 n1 3 n3 10 
+
+linkstate 2019-01-21 23:06:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 157 n3 20 n2 1 
+node_listener 2019-01-21 23:06:45 -0800: n3 recieved packet, count = 114 // LINKSTATE 158 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:45 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 158 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:47 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:06:49 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 159 n3 20 n2 1 
+node_listener 2019-01-21 23:06:49 -0800: n3 recieved packet, count = 115 // LINKSTATE 160 n2 20 n1 3 n3 10 
+
+dijkstra 2019-01-21 23:06:51 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:06:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 161 n3 20 n2 1 
+node_listener 2019-01-21 23:06:53 -0800: n3 recieved packet, count = 116 // LINKSTATE 161 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:53 -0800: n3 recieved packet, count = 117 // LINKSTATE 162 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:53 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 162 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:55 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:06:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 163 n3 20 n2 1 
+node_listener 2019-01-21 23:06:57 -0800: n3 recieved packet, count = 118 // LINKSTATE 164 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:06:57 -0800: n3 recieved packet, count = 119 // LINKSTATE 165 n1 20 n2 1 
+
+linkstate 2019-01-21 23:06:57 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 165 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:06:59 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:07:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 166 n3 20 n2 1 
+node_listener 2019-01-21 23:07:01 -0800: n3 recieved packet, count = 120 // LINKSTATE 166 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:07:01 -0800: n3 recieved packet, count = 121 // LINKSTATE 167 n1 20 n2 1 
+
+linkstate 2019-01-21 23:07:01 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 167 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:07:03 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:07:05 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 168 n3 20 n2 1 
+node_listener 2019-01-21 23:07:05 -0800: n3 recieved packet, count = 122 // LINKSTATE 169 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:07:06 -0800: n3 recieved packet, count = 123 // LINKSTATE 170 n1 20 n2 1 
+
+linkstate 2019-01-21 23:07:06 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 170 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:07:07 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:07:09 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 171 n3 20 n2 1 
+node_listener 2019-01-21 23:07:09 -0800: n3 recieved packet, count = 124 // LINKSTATE 172 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:07:10 -0800: n3 recieved packet, count = 125 // LINKSTATE 173 n1 20 n2 1 
+
+linkstate 2019-01-21 23:07:10 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 173 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:07:11 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:07:13 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 174 n3 20 n2 1 
+node_listener 2019-01-21 23:07:13 -0800: n3 recieved packet, count = 126 // LINKSTATE 175 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:07:14 -0800: n3 recieved packet, count = 127 // LINKSTATE 176 n1 20 n2 1 
+
+linkstate 2019-01-21 23:07:14 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 176 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:07:15 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:07:17 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 177 n3 20 n2 1 
+node_listener 2019-01-21 23:07:17 -0800: n3 recieved packet, count = 128 // LINKSTATE 178 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:07:18 -0800: n3 recieved packet, count = 129 // LINKSTATE 179 n1 20 n2 1 
+
+linkstate 2019-01-21 23:07:18 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 179 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:07:19 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
+linkstate 2019-01-21 23:07:21 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 180 n3 20 n2 1 
+node_listener 2019-01-21 23:07:21 -0800: n3 recieved packet, count = 130 // LINKSTATE 181 n2 20 n1 3 n3 10 
+
+node_listener 2019-01-21 23:07:22 -0800: n3 recieved packet, count = 131 // LINKSTATE 182 n1 20 n2 1 
+
+linkstate 2019-01-21 23:07:22 -0800: Attempting to write to n2 on sockfd #<TCPSocket:0x97e8ca0> packet LINKSTATE 182 n1 20 n2 1 
+
+dijkstra 2019-01-21 23:07:23 -0800: {"n2"=>["n2", 1], "n1"=>["n2", 4]}
