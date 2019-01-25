@@ -8,7 +8,7 @@ rm -f ./n2_t0_d1_table.dt-out > /dev/null
 ruby ./gen_config.rb
 
 
-./controller nodes.txt config < public01.in
+ruby ./controller nodes.txt config < public01.in
 
 
 #MAKE SURE THESE EXIST
@@ -17,7 +17,7 @@ touch ./console_n2
 touch ./console_n3
 touch ./console_n4
 
-RES1=($(grep 'SNDMSG: n1 --> "Hello World"' console_n4 | wc))
+RES1=($(grep 'SENDMSG: n1 --> "Hello World"' console_n4 | wc))
 lines=${RES1[0]}
 
 if [ $lines != "1" ]

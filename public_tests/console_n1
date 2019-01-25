@@ -1,33 +1,6 @@
-127.0.0.1
-127.0.0.1
-n2
-Sockfd: #<TCPSocket:0x8e2e908> connected to peer n2
-Server n1 connected to #<TCPSocket:0x8e3f1cc>
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 877 n1 20 n2 1 
-count = 0 host: n1 recieved packet: LINKSTATE 877 n2 20 n1 1 
-Rec
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 878 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 879 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 880 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 881 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 882 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 883 n1 20 n2 n2 
-wjat
+0 n3 0.530020668
+1 n3 1.102939924
+2 n3 0.842120751
 Name: n1
 Port: 24178
 Neighbors: n2
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 884 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 885 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 886 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 887 n1 20 n2 n2 
-wjat
-Attempting to write to n2 on sockfd #<TCPSocket:0x8e2e908> packet LINKSTATE 888 n1 20 n2 n2 

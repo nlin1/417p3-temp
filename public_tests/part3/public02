@@ -10,7 +10,7 @@ rm -f ./n2_t0_d1_table.dt-out > /dev/null
 ruby ./gen_config.rb
 
 
-./controller nodes.txt config < public02.in
+ruby ./controller nodes.txt config < public02.in
 
 #MAKE SURE THESE FILES EXIST
 touch ./console_n1

@@ -19,6 +19,9 @@ $traceroutes = {}
 $logfile = nil
 
 
+$sendmsgBuffer = Hash.new
+
+
 $commands = {
     "DUMPTABLE" => :dumptable,
     "SHUTDOWN" => :shutdown,
@@ -89,14 +92,13 @@ def linkstate(msg)
 	end
   
    	$peers.each do |node, peer|
-
-   		if(temp[2] != peer.hostname) #send to peers besides sender
-
-   			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
-
-   			peer.sock.puts(packet)
-            peer.sock.flush
-   		end
+   		if not $shutdown_flag
+	   		if(temp[2] != peer.hostname) #send to peers besides sender
+	   			log($logfile, "linkstate", "Attempting to write to " + node + " on sockfd " + peer.sock.to_s + " packet " + packet)
+	   			peer.sock.puts(packet)
+	            peer.sock.flush
+	   		end
+	   	end
    	end
    	$current_linkstate = temp[1].to_i
    	packet.clear
@@ -196,9 +198,10 @@ end
 
 def routes(cmd)
   $routing_table.each do |key, value|
-    print key + ", "
+    STDOUT.print key + ", "
   end
-  puts ""
+  STDOUT.puts ""
+  STDOUT.flush
 end
 
 def log(logFile, functionName, message)
@@ -213,6 +216,37 @@ def log(logFile, functionName, message)
   File.open(logFile, "a+") do |file|
     file << message
   end
+end
+
+
+#sendmsg fragmentation helpers
+def isFragment? msg
+  return msg.length == 5
+end
+
+def addToBuffer(msg)
+  src = msg[1]
+  message = msg[2]
+  id = msg[3].to_i
+  maxNum = msg[4].to_i
+  if !$sendmsgBuffer.key? src
+    $sendmsgBuffer[src] = Hash.new
+    $sendmsgBuffer[src]["max"] = maxNum
+    $sendmsgBuffer[src][id] = message
+  else
+    $sendmsgBuffer[src][id] = message
+  end
+  # Return true is all fragments have been received, else return false
+  res = $sendmsgBuffer[src].length == $sendmsgBuffer[src]["max"] + 1
+  return res
+end
+
+def retMsg(src, maxNum)
+  buffer = src + " --> "
+  for i in 0...maxNum
+    buffer = buffer + $sendmsgBuffer[src][i].tr('_', ' ')
+  end
+  return buffer
 end
 
 # --------------------- Part 1 --------------------- #
@@ -233,13 +267,11 @@ def edgeb(cmd)
 	else
 		$routing_table[cmd[2]] = [cmd[2], 1]
 	end
-  puts cmd
 	sock = TCPSocket.new cmd[1], $node_map[cmd[2]].to_i
 	sock.sync = true
 	$peers[cmd[2]] = Peer.new(cmd[1], cmd[2], sock)
-	puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
+	#puts "Sockfd: " + sock.to_s + " connected to peer " + cmd[2].to_s
 	sock.puts "EDGEB " + cmd[0] + " " + $hostname + " " + $port
-
 	return 0
 end
 
@@ -271,6 +303,7 @@ def shutdown(cmd)
 	$shutdown_flag = true
 	STDOUT.flush
 	STDERR.flush
+	sleep(1)
 	exit(0)
 end
 
@@ -295,8 +328,8 @@ end
 node specified by DST.
 =end
 def edgeu(cmd)
-	if($routing_table.has_key(cmd[0]) && (cmd[1] >= -2147483648 && cmd[1] <= 2147483647))
-		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1]]
+	if($routing_table.has_key?(cmd[0]) && (cmd[1].to_i >= -2147483648 && cmd[1].to_i <= 2147483647))
+		$routing_table[cmd[0]] = [$routing_table[cmd[0]][0], cmd[1].to_i]
 	end
 end
 
@@ -342,11 +375,40 @@ end
  Description: This method will deliver the string MSG to the process running on DST.
 =end
 def sendmsg(cmd)
+
+	log($logfile, "sendmsg", "Recieved SENDMSG, writing to " + cmd[0] + " with routing table " + $routing_table.to_s)
+
 	if $routing_table.has_key?(cmd[0])
-		concat = cmd[1..-1].join("_")
-		$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + $hostname + " " + concat
+	  concat = cmd[1..-1].join("_")
+          if concat.length > $config_map["maxPayload"].to_i
+            # If message is larger than payload, split it into fragments
+            fragments = Array.new
+            start = 0
+            finish = concat.length
+            # Reserve 3 bytes for counter and last fragment info
+            payload = $config_map["maxPayload"].to_i - 3 
+            counter = 0
+            while start < finish
+              if start + payload > finish
+                msg = "SENDMSG " + cmd[0] + " " + $hostname + " " + concat[start..-1] + " " + counter.to_s
+              else
+                msg = "SENDMSG " + cmd[0] + " " + $hostname + " " + concat[start...(start + payload)] + " " + counter.to_s
+              end
+              fragments.push(msg)
+              counter += 1
+              start = start + payload
+            end
+            fragments.each do |msg|
+              $peers[$routing_table[cmd[0]][0]].sock.puts msg + " " + fragments.length.to_s
+              $peers[$routing_table[cmd[0]][0]].sock.flush
+            end
+          else
+	    	$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + $hostname + " " + concat
+	    	$peers[$routing_table[cmd[0]][0]].sock.flush
+          end
 	else
-		puts "SENDMSG ERROR: HOST UNREACHABLE"
+		STDOUT.puts "SENDMSG ERROR: HOST UNREACHABLE - main"
+		STDOUT.flush
 	end
 end
 
@@ -356,25 +418,28 @@ end
 be a delay of DELAY seconds between pings.
 =end
 def ping(cmd)
+
+	log($logfile, "ping", "Recieved PING, writing to " + cmd[0] + " with routing table " + $routing_table.to_s)
+
 	if not $routing_table.has_key?(cmd[0])
-		puts "PING ERROR: HOST UNREACHABLE"
+		STDOUT.puts "PING ERROR: HOST UNREACHABLE"
 		return
 	end
 	$pings.clear
 	ping_no = 0
-	puts "ping " + cmd[1] + "."
+	#puts "ping " + cmd[1] + "."
 	thr = Thread.new{
 		while ping_no < cmd[1].to_i
 			#cmd: dst, sender, seq id, returning flag, ping num
-			puts "Attempting to write PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
+			#puts "Attempting to write PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
 			$peers[$routing_table[cmd[0]][0]].sock.puts "PING " + cmd[0] + " " + $hostname + " " + ping_no.to_s + " false "
-			$pings[ping_no] = [Time.now, false]
+			$pings[ping_no] = [$clock, false]
 			ping_no += 1
 			sleep(cmd[2].to_i)
 			i = 0
 			while i < ping_no
 				if $pings[i][1] == false && $clock - $pings[i][0] >= $config_map["pingTimeout"].to_i
-					puts "PING ERROR: HOST UNREACHABLE"
+					STDOUT.puts "PING ERROR: HOST UNREACHABLE"
 					$pings[i][1] = true
 				end
 				i += 1
@@ -390,9 +455,30 @@ end
  Description: This method will perform traceroute from the SRC to the DST.
 =end
 def traceroute(cmd)
+
+	log($logfile, "TRACEROUTE", "Recieved traceroute, writing to " + cmd[0] + " with routing table " + $routing_table.to_s)
+
+	$tr = []
+	$tr.push(0)
+	$max_hop = 0
+	if not $routing_table.has_key?(cmd[0])
+		STDOUT.puts "TIMEOUT ON 0"
+		return
+	end
+	$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " 1 false " + $clock.to_i.to_s + " " + $hostname
+	STDOUT.puts "0 " + $hostname + " 0"
+
+	thr = Thread.new{
+		sleep($config_map["pingTimeout"].to_i)
+		for i in 0..($max_hop)
+			if not $tr.include?(i)
+				STDOUT.puts "TIMEOUT ON " + i.to_s
+			end
+		end
+	}
+	thr.join
 	#cmd: dst, hop, returning flag, time sent, sender
-	$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " 1 false " + $clock.to_i + " " + $hostname
-	puts "0 " + $hostname + " 0"
+	$tr.clear
 end
 
 # --------------------- Part 4 --------------------- #
@@ -420,7 +506,7 @@ def main()
 		case cmd
 		when "EDGEB"; edgeb(args) #part 0
 		when "EDGED"; edged(args)
-		when "EDGEU"; edgeU(args)
+		when "EDGEU"; edgeu(args)
 		when "DUMPTABLE"; dumptable(args) #part 0
 		when "SHUTDOWN"; shutdown(args)	#part0
 		when "STATUS"; status()
@@ -443,7 +529,7 @@ def setup(hostname, port, nodes, config)
 	$config_map = {}
 	$clock_semaphore = Mutex.new
 	$clock = Time.now
-  $logfile = "log" + $hostname + ".txt"
+  	$logfile = "log" + $hostname + ".txt"
 
 	#set up ports, server, buffers
 
@@ -485,13 +571,20 @@ def node_listener(port)
 
 	  	Thread.start(server.accept) do |client|
 	    
-			while $shutdown_flag == false do
+			while not $shutdown_flag do
 
 				#puts "Server " + $hostname + " connected to " + client.to_s 
 	              
 				line = client.gets
+
+				if $shutdown_flag
+					break
+				end
+
 				temp = line.split(" ")
+
 				#puts "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line
+
 				log($logfile, "node_listener", "" + $hostname + " recieved packet, count = " + i.to_s + " // " + line)
 				i += 1
 
@@ -569,7 +662,7 @@ def task_thread()
     while (true)
         time_flag = nil
         $clock_semaphore.synchronize {
-            if (($clock - task_clock) >= $config_map["updateInterval"]*2)
+            if (($clock - task_clock) >= $config_map["updateInterval"])
                 time_flag = true
                 task_clock = $clock
             else
@@ -605,33 +698,50 @@ def task_thread()
             # the tasks that are enqueued
             if queue_flag
                 if task[0] == :edgeb
-                	puts "EDGEB Received, in task thread"
+                	#puts "EDGEB Received, in task thread"
 					t_sock = TCPSocket.new cmd[0], cmd[2].to_i
 					t_sock.sync = true
 					$peers[cmd[1]] = Peer.new(cmd[0], cmd[1], t_sock)
-					puts "Sockfd: " + t_sock.to_s + " connected to peer " + cmd[1].to_s
+					#puts "Sockfd: " + t_sock.to_s + " connected to peer " + cmd[1].to_s
 					$routing_table[cmd[1]] = [cmd[1], 1]
-					STDOUT.flush
 
 				#cmd: dst, sender, msg
 				elsif task[0] == :sendmsg
 					if cmd[0] == "fail" && cmd[1] == $hostname
-						puts "SENDMSG ERROR: HOST UNREACHABLE"
+						STDOUT.puts "SENDMSG ERROR: HOST UNREACHABLE - task"
+						STDOUT.flush
 					elsif cmd[0] == $hostname #INTENDED BEHAVIOR
-						puts cmd[1] + " --> " + cmd[2].tr('_',' ')
+                      if isFragment? cmd
+                        add = addToBuffer(cmd)
+                        if add
+                          STDOUT.puts retMsg(cmd[1], cmd[4].to_i)
+                          STDOUT.flush
+                        end
+                        log($logfile, "sendmsg", "fragmented message received")
+                      else
+    					STDOUT.puts "SENDMSG: " + cmd[1] + " --> " + cmd[2].tr('_',' ')
+    					STDOUT.flush
+                      end
 					elsif not $routing_table.has_key?(cmd[0])
 						$peers[$routing_table[cmd[1]][0]].sock.puts "SENDMSG fail " + cmd[1] + " *"
+						$peers[$routing_table[cmd[1]][0]].sock.flush
 					else
-						$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2]				
+                      if isFragment? cmd
+                        $peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2] + " " + cmd[3] + " " + cmd[4]
+                        $peers[$routing_table[cmd[0]][0]].sock.flush
+                      else
+    					$peers[$routing_table[cmd[0]][0]].sock.puts "SENDMSG " + cmd[0] + " " + cmd[1] + " " + cmd[2]
+    					$peers[$routing_table[cmd[0]][0]].sock.flush
+                  	  end
 					end
 
 				#cmd: dst, sender, seq num, returning flag
 				elsif task[0] == :ping
 					if cmd[0] == "fail" && cmd[1] == $hostname
-						puts "PING ERROR: HOST UNREACHABLE"
+						STDOUT.puts "PING ERROR: HOST UNREACHABLE"
 					elsif cmd[0] == $hostname && cmd[3] == "true" #INTENDED BEHAVIOR
 						if $pings[cmd[2].to_i][1] == false
-							puts cmd[2] + " " + cmd[1] + " " + (Time.now - $pings[cmd[2].to_i][0]).to_s
+							STDOUT.puts cmd[2] + " " + cmd[1] + " " + ($clock - $pings[cmd[2].to_i][0]).to_s
 							$pings[cmd[2].to_i][1] = true
 						end
 					elsif cmd[0] == $hostname && cmd[3] == "false"
@@ -644,22 +754,33 @@ def task_thread()
 
 				#cmd: dst, hop, returning flag, time sent, sender
 				elsif task[0] == :traceroute
-					if cmd[0] != $hostname && cmd[2] == "false"
+					log($logfile, "TRACEROUTE", "In traceroute, cmd packet: " + cmd.to_s)
+					if cmd[0] == $hostname && cmd[3] == "fail"
+						STDOUT.puts "TIMEOUT on " + cmd[3]
+					elsif cmd[0] == $hostname && cmd[2] == "false"
+						log($logfile, "TRACEROUTE", "756 Intermediate step, writing to " + cmd[4] + " with routing table " + $routing_table.to_s)
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
+					elsif cmd[0] == $hostname && cmd[2] == "true"
+						$tr.push(cmd[1].to_i)
+						if cmd[1].to_i > $max_hop
+							$max_hop = cmd[1].to_i
+						end
+						STDOUT.puts cmd[1] + " " + cmd[4] + " " + cmd[3]
+					elsif not $routing_table.has_key?(cmd[0])
+						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + (cmd[1].to_i + 1).to_s + " true fail *"  
+					elsif cmd[0] != $hostname && cmd[2] == "false"
+						log($logfile, "TRACEROUTE", "767 Intermediate step, writing to " + cmd[0] + " and " + cmd[4] + " with routing table " + $routing_table.to_s)
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + (cmd[1].to_i + 1).to_s + " " + cmd[2] + " " + cmd[3] + " " + cmd[4]
 						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
 					elsif cmd[0] != $hostname && cmd[2] == "true"
 						$peers[$routing_table[cmd[0]][0]].sock.puts "TRACEROUTE " + cmd[0] + " " + cmd[1] + " true " + cmd[3] + " " + cmd[4]
-					elsif cmd[0] == $hostname && cmd[2] == "false"
-						$peers[$routing_table[cmd[4]][0]].sock.puts "TRACEROUTE " + cmd[4] + " " + cmd[1] + " true " + ($clock.to_i - cmd[3].to_i).to_s + " " + $hostname
-					elsif cmd[0] == $hostname && cmd[2] == "true"
-						puts cmd[1] + " " + cmd[4] + " " + cmd[3]
 					end
-                else
-                    #send($commands[task[0]], cmd)
+                #elsif (task != nil)
+                #    send($commands[task[0]], cmd)
                 end
 
                 task.clear
-                cmd.clear
+                #cmd.clear
                 temp = ""
             end
         end
